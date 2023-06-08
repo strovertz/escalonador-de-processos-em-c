@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "func_apoio.h": "c",
+        "fifo.h": "c",
+        "untils.h": "c"
+    }
+}

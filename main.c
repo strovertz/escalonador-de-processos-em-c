@@ -2,11 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "fifo.h"
-
-typedef struct {
-    int tempo_total;
-
-} input_f;
+#include "untils.h"
 
 // Processo é gerado e chega na arrive queue
 // Tem espaço no Systema?  Tenta usar a CPU; Não tem ? espera na arrive até liberar.
@@ -21,16 +17,18 @@ typedef struct {
 // IF - Processo solicita IO, retira ele da CPU e aloca no dispositivo de IO,
 // - SE O DISPotivo de IO tiver ocupado, espera na fila de dispositivos (IO/QUeue - Fila dupla encadeada, ordem de prioridade)
 
+// Meta 1 - Fazer as filas.
+
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         printf("Uso: ./filename <NUM_MAX_DE_PROCESSOS\n");
         return 1;
     }
-    Fila_lista* arrive_queue = filaLista_cria();
+    Arrive* arrive_queue = arrive_cria();
     for (int i = 0; i < 10; i++) {
-        filaLista_insere(arrive_queue, rand());
+        arrive_insere(arrive_queue, rand());
         }
-    filaLista_imprime(arrive_queue);
+    arrive_imprime(arrive_queue);
     printf("\n");
     return 0;
 }

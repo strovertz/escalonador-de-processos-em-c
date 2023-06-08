@@ -2,18 +2,21 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 #include "fifo.h"
 
-Fila_lista* filaLista_cria(void){
-	Fila_lista* f = (Fila_lista*) malloc(sizeof(Fila_lista));
+Arrive* arrive_cria(void){
+	Arrive* f = (Arrive*) malloc(sizeof(Arrive));
 	f->ini = f->fim = NULL;
 
 	return f;
 }
 
-void filaLista_insere(Fila_lista* f, int valor){
-	Lista* l = (Lista*) malloc(sizeof(Lista));
-	l->info = valor;
+void arrive_insere(Arrive* f, int valor){
+	Process* l = (Process*) malloc(sizeof(Process));
+	l->queuetime = clock();
+    l->id = rand()%90;
+    l->IO = rand()%2;
 	l->prox = NULL;
 
 	if(f->fim != NULL)
@@ -24,35 +27,32 @@ void filaLista_insere(Fila_lista* f, int valor){
 	f->fim = l;
 }
 
-int filaLista_retira(Fila_lista* f){
-	Lista* l = f->ini;
-	int valor = l->info;
-
+int arrive_retira(Arrive* f){
+	Process* l = f->ini;
+    int id_removido = l->id;
 	f->ini = l->prox;
 
 	if(f->ini == NULL)
 		f->fim = NULL;
 	
-
 	free(l);
-
-	return valor;
+    return id_removido;
 }
 
-void filaLista_imprime(Fila_lista* f){
-	Lista* l;
+void arrive_imprime(Arrive* f){
+	Process* l;
 
 	for(l = f->ini; l != NULL; l = l->prox)
-		printf("%d ", l->info);
+		printf("Process ID: %d;\nTime Stamp: %d\n", l->queuetime, l->id);
 }
 
-int filaLista_vazia(Fila_lista* f){
+int arrive_vazia(Arrive* f){
 	return(f->ini == NULL);
 }	
 
-void filaLista_libera(Fila_lista* f){
-	Lista* l = f->ini;
-	Lista* q = l;
+void arrive_libera(Arrive* f){
+	Process* l = f->ini;
+	Process* q = l;
 	while(q != NULL){
 		l = q->prox;
 		free(q);
