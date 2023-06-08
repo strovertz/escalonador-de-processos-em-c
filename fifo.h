@@ -18,13 +18,15 @@ typedef struct arrive{
 }Arrive;
 
 typedef struct ready{
-
+    Process* ini;
+    Process* fim;
 }Ready;
 
 
 Arrive* arrive_cria(void);
-void arrive_insere(Arrive* f, int valor);
-int arrive_retira(Arrive* f);
-void arrive_imprime(Arrive* f);
-int arrive_vazia(Arrive* f);
-void arrive_libera(Arrive* f);
+Ready* ready_cria(void);
+void arrive_insere(void* f, int valor);
+int arrive_retira(void* f);
+void arrive_imprime(void* f);
+int arrive_vazia(void* f);
+void arrive_libera(void* f);

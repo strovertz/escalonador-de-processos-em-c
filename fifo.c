@@ -12,7 +12,7 @@ Arrive* arrive_cria(void){
 	return f;
 }
 
-void arrive_insere(Arrive* f, int valor){
+void arrive_insere(void* f, int valor){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = clock();
     l->id = rand()%90;
@@ -41,7 +41,6 @@ int arrive_retira(Arrive* f){
 
 void arrive_imprime(Arrive* f){
 	Process* l;
-
 	for(l = f->ini; l != NULL; l = l->prox)
 		printf("Process ID: %d;\nTime Stamp: %d\n", l->queuetime, l->id);
 }
