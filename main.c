@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 #include "filas.h"
 #include "untils.h"
 
@@ -19,11 +20,14 @@
 
 // Meta 1 - Fazer as filas. | Ready e Arrive = OK
 
-void cpu(){
-
+Process* cpu(Process* p, int time_slice, int tempo_maximo){
+    clock_t begin = clock();
+    sleep(time_slice);    
+    p->tam = p->tam - time_slice;
+    return p;
 }
 
-void teste(){
+void teste(int time_slice, int tempo_maximo){
     Arrive* arrive_queue = arrive_cria();
     Ready* ready_queue = ready_cria();
     for (int i = 0; i < 10; i++) {
@@ -37,7 +41,14 @@ void teste(){
     printf("\nARRIVE NOVA: \n");
     arrive_imprime(arrive_queue);
     printf("\n");
-    
+    printf("TESTANDO PROCESSADOR\n");
+    Process* p = ready_retira(ready_queue);
+    printf("TAM ATUAL: %d\n", p->tam);
+    p = cpu(p, time_slice, tempo_maximo);
+    printf("TAM POS PROCESS: %d", p->tam);
+    ready_insere(ready_queue, p);
+    printf("\n");
+
 }
 
 int main(int argc, char* argv[]) {
@@ -45,6 +56,8 @@ int main(int argc, char* argv[]) {
         printf("Uso: ./filename <NUM_MAX_DE_PROCESSOS\n");
         return 1;
     }
-    teste();
+    int tempo_maximo = 10;
+    int time_slice = 20;
+    teste(time_slice, tempo_maximo);
     return 0;
 }

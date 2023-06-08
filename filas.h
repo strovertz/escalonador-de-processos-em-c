@@ -30,9 +30,8 @@ int arrive_vazia(Arrive* f);
 void arrive_libera(Arrive* f);
 
 Ready* ready_cria(void);
-void ready_insere(Ready* f, int valor);
-void ready_insere_from_other(Ready* f, Process* n);
-int ready_retira(Ready* f);
+void ready_insere(Ready* f, Process* n);
+Process* ready_retira(Ready* f);
 void ready_imprime(Ready* f);
 int ready_vazia(Ready* f);
 void ready_libera(Ready* f);

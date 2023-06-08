@@ -7,5 +7,5 @@
 // função que tira da fila Arrive q joga pra fila Ready
 void* arrive_to_ready(Ready* r, Arrive* a){
     Process* n = arrive_retira(a);
-    ready_insere_from_other(r, n);
+    ready_insere(r, n);
 }

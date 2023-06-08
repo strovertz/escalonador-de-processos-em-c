@@ -12,22 +12,7 @@ Ready* ready_cria(void){
 	return f;
 }
 
-void ready_insere(Ready* f, int valor){
-	Process* l = (Process*) malloc(sizeof(Process));
-	l->queuetime = clock();
-    l->id = rand()%90;
-    l->IO = rand()%2;
-	l->prox = NULL;
-
-	if(f->fim != NULL)
-		f->fim->prox = l;
-	else
-		f->ini = l;
-
-	f->fim = l;
-}
-
-void ready_insere_from_other(Ready* f, Process* n){
+void ready_insere(Ready* f, Process* n){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = n->queuetime;
     l->id = n->id;
@@ -42,18 +27,20 @@ void ready_insere_from_other(Ready* f, Process* n){
 	f->fim = l;
 }
 
-int ready_retira(Ready* f){
-	Process* l = f->ini;
+Process* ready_retira(Arrive* f){
+    if (f->ini == NULL) {
+        // A fila está vazia, não há elementos para remover
+        return NULL;
+    }
+    Process* l = f->ini;
     int id_removido = l->id;
-	f->ini = l->prox;
+    f->ini = l->prox;
 
-	if(f->ini == NULL)
-		f->fim = NULL;
-	
-	free(l);
-    return id_removido;
+    if (f->ini == NULL) {
+        f->fim = NULL;
+    }
+    return l;
 }
-
 void ready_imprime(Ready* f){
 	Process* l;
 	for(l = f->ini; l != NULL; l = l->prox)
