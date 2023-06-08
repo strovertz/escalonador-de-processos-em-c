@@ -42,11 +42,10 @@ Process* arrive_retira(Arrive* f){
     return l;
 }
 
-
 void arrive_imprime(Arrive* f){
 	Process* l;
 	for(l = f->ini; l != NULL; l = l->prox)
-		printf("Process ID: %d;\nTime Stamp: %d\n", l->queuetime, l->id);
+		printf("Process ID: %d;\nTime Stamp: %d\nCPU times Needed", l->queuetime, l->id);
 }
 
 int arrive_vazia(Arrive* f){
@@ -61,6 +60,5 @@ void arrive_libera(Arrive* f){
 		free(q);
 		q = l;
 	}
-
 	free(f);
 }	

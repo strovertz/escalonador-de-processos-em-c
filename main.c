@@ -17,13 +17,13 @@
 // IF - Processo solicita IO, retira ele da CPU e aloca no dispositivo de IO,
 // - SE O DISPotivo de IO tiver ocupado, espera na fila de dispositivos (IO/QUeue - Fila dupla encadeada, ordem de prioridade)
 
-// Meta 1 - Fazer as filas.
+// Meta 1 - Fazer as filas. | Ready e Arrive = OK
 
-int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        printf("Uso: ./filename <NUM_MAX_DE_PROCESSOS\n");
-        return 1;
-    }
+void cpu(){
+
+}
+
+void teste(){
     Arrive* arrive_queue = arrive_cria();
     Ready* ready_queue = ready_cria();
     for (int i = 0; i < 10; i++) {
@@ -37,5 +37,14 @@ int main(int argc, char* argv[]) {
     printf("\nARRIVE NOVA: \n");
     arrive_imprime(arrive_queue);
     printf("\n");
+    
+}
+
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        printf("Uso: ./filename <NUM_MAX_DE_PROCESSOS\n");
+        return 1;
+    }
+    teste();
     return 0;
 }
