@@ -2,9 +2,10 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
-#include "fifo.h"
+#include "filas.h"
 
 // função que tira da fila Arrive q joga pra fila Ready
-Process* arrive_to_ready(){
-    return 0;
+void* arrive_to_ready(Ready* r, Arrive* a){
+    Process* n = arrive_retira(a);
+    ready_insere_from_other(r, n);
 }

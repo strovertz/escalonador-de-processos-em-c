@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "fifo.h"
+#include "filas.h"
 #include "untils.h"
 
 // Processo é gerado e chega na arrive queue
@@ -25,9 +25,16 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     Arrive* arrive_queue = arrive_cria();
+    Ready* ready_queue = ready_cria();
     for (int i = 0; i < 10; i++) {
         arrive_insere(arrive_queue, rand());
         }
+    arrive_imprime(arrive_queue);
+    printf("\nTRANFERINDO DE ARRIVE TO READY\n");
+    arrive_to_ready(ready_queue, arrive_queue);
+    printf("\nREADY NOVA: \n");
+    ready_imprime(ready_queue);
+    printf("\nARRIVE NOVA: \n");
     arrive_imprime(arrive_queue);
     printf("\n");
     return 0;
