@@ -12,22 +12,23 @@ Ready* ready_cria(void){
 	return f;
 }
 
-void ready_insere(Ready* f, Process* n){
+void ready_insere(Ready* r, Process* n){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = n->queuetime;
     l->id = n->id;
     l->IO = n->IO;
+    l->tam = n->tam;
 	l->prox = NULL;
 
-	if(f->fim != NULL)
-		f->fim->prox = l;
+	if(r->fim != NULL)
+		r->fim->prox = l;
 	else
-		f->ini = l;
+		r->ini = l;
 
-	f->fim = l;
+	r->fim = l;
 }
 
-Process* ready_retira(Arrive* f){
+Process* ready_retira(Ready* f){
     if (f->ini == NULL) {
         // A fila está vazia, não há elementos para remover
         return NULL;
@@ -44,7 +45,7 @@ Process* ready_retira(Arrive* f){
 void ready_imprime(Ready* f){
 	Process* l;
 	for(l = f->ini; l != NULL; l = l->prox)
-		printf("Process ID: %d;\nTime Stamp: %d\n", l->queuetime, l->id);
+		printf("Process ID: %d;\n	Time Stamp: %d\n	CPU times Needed: %d\n", l->id, l->queuetime, l->tam);
 }
 
 int ready_vazia(Ready* f){

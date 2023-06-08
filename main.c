@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <time.h>
+#include <unistd.h>
 #include "filas.h"
 #include "untils.h"
 
@@ -22,33 +23,36 @@
 
 Process* cpu(Process* p, int time_slice, int tempo_maximo){
     clock_t begin = clock();
-    sleep(time_slice);    
+    sleep(time_slice); 
     p->tam = p->tam - time_slice;
     return p;
 }
 
-void teste(int time_slice, int tempo_maximo){
-    Arrive* arrive_queue = arrive_cria();
-    Ready* ready_queue = ready_cria();
-    for (int i = 0; i < 10; i++) {
-        arrive_insere(arrive_queue, rand());
-        }
-    arrive_imprime(arrive_queue);
-    printf("\nTRANFERINDO DE ARRIVE TO READY\n");
-    arrive_to_ready(ready_queue, arrive_queue);
-    printf("\nREADY NOVA: \n");
-    ready_imprime(ready_queue);
-    printf("\nARRIVE NOVA: \n");
-    arrive_imprime(arrive_queue);
-    printf("\n");
-    printf("TESTANDO PROCESSADOR\n");
-    Process* p = ready_retira(ready_queue);
-    printf("TAM ATUAL: %d\n", p->tam);
+void processa_ready(Ready* r, int time_slice, int tempo_maximo){
+    Process* p = ready_retira(r);
+    printf("Ready Depois de retirar P");
+    ready_imprime(r);
+    printf("Process ID: %d\nTAM ATUAL: %d\n", p->id, p->tam);
     p = cpu(p, time_slice, tempo_maximo);
-    printf("TAM POS PROCESS: %d", p->tam);
-    ready_insere(ready_queue, p);
+    printf("TAM POS PROCESS: %d\n", p->tam);
+    ready_insere(r, p);
+    printf("depois de inserir p processado\n");
+    ready_imprime(r);
     printf("\n");
+}
 
+void imprime_filas(Ready* r, Arrive* a, int time_slice, int tempo_maximo){
+    for (int i = 0; i < 10; i++) {
+        arrive_insere(a, rand());
+        }
+    arrive_imprime(a);
+    printf("\nTransferindo de Arrive to Ready\n");
+    arrive_to_ready(r, a);
+    printf("\nReady Nova: \n");
+    ready_imprime(r);
+    printf("\nArrive Nova: \n");
+    arrive_imprime(a);
+    printf("\n");    
 }
 
 int main(int argc, char* argv[]) {
@@ -56,8 +60,13 @@ int main(int argc, char* argv[]) {
         printf("Uso: ./filename <NUM_MAX_DE_PROCESSOS\n");
         return 1;
     }
+    Arrive* arrive_queue = arrive_cria();
+    Ready* ready_queue = ready_cria();
     int tempo_maximo = 10;
-    int time_slice = 20;
-    teste(time_slice, tempo_maximo);
+    int time_slice = 2;
+
+    printf("Estado atual de filas:");
+    imprime_filas(ready_queue, arrive_queue, time_slice, tempo_maximo);
+    processa_ready(ready_queue, time_slice, tempo_maximo);
     return 0;
 }

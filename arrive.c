@@ -17,6 +17,7 @@ void arrive_insere(Arrive* f, int valor){
 	l->queuetime = clock();
     l->id = rand()%90;
     l->IO = rand()%2;
+	l->tam = rand()%100;
 	l->prox = NULL;
 
 	if(f->fim != NULL)
@@ -45,7 +46,7 @@ Process* arrive_retira(Arrive* f){
 void arrive_imprime(Arrive* f){
 	Process* l;
 	for(l = f->ini; l != NULL; l = l->prox)
-		printf("Process ID: %d;\nTime Stamp: %d\nCPU times Needed", l->queuetime, l->id);
+		printf("Process ID: %d;\n	Time Stamp: %d\n	CPU times Needed: %d\n", l->id, l->queuetime, l->tam);
 }
 
 int arrive_vazia(Arrive* f){
