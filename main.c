@@ -29,9 +29,11 @@ Process* cpu(Process* p, int time_slice){
     if(p->tam < time_slice) {
         usleep(p->tam);
         p->tam = 0;
+        CONT+=p->tam;
         return p;
     } else usleep(time_slice);
     p->tam = p->tam - time_slice;
+    CONT+=time_slice;
     return p;
 }
 
@@ -39,10 +41,10 @@ void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo){
     Process* p = fila_retira(r);
     fila_imprime(r);
     printf("\nProcess ID: %d\nQtd Slices: %d\n", p->id, p->tam);
-    if(p == NULL) {fila_insere_arrive(a); arrive_to_ready(r, a);}
+    if(p == NULL) {fila_insere_arrive(a); arrive_to_ready(r, a); CONT+=1;}
     while (tempo_maximo != 0){      
         p = cpu(p, time_slice);
-        if(p->tam > 0) {fila_insere_ready(r, p); printf("Restam %d Slices para encerrar o processo %d\n", p->tam, p->id);} else printf("Processo %d encerrado\n", p->id);
+        if(p->tam > 0) {fila_insere_ready(r, p); printf("Restam %d Slices para encerrar o processo %d\n", p->tam, p->id); CONT+=1;} else printf("Processo %d encerrado\n", p->id);
         printf("\n");
         if(p->prox == NULL) for(int i = 0; i < rand()%10; i++) {fila_insere_arrive(a); printf("b.o tam"); arrive_to_ready(r, a);}
         p = fila_retira(r);
