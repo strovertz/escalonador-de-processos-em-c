@@ -31,9 +31,11 @@ Lista* lst_cria(void);
 Lista* lst_insere(Lista* l, Process* p);
 Lista* ultimo (Lista* l);
 Lista* lst_retira_ant (Lista* l, int v);
+Lista* insere_crescente(Lista* l, Process* proc);
 Lista* lst_busca(Lista* l, int v);
 void lst_imprime(Lista *l);
 void lst_desaloca(Lista* l);	
+
 
 
 Fila* fila_cria(void);

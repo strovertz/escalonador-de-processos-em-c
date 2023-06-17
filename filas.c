@@ -47,12 +47,12 @@ void fila_insere_ready(Fila* r, Process* n){
 void fila_insere_arrive(Fila* f){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = clock();
-    l->id = rand()%90;
+    l->id = rand()%9000;
     l->IO = rand()%2;
-	l->tam = rand()%10;
-	l->in_io = false;
 	while (l->tam<=0) l->tam = rand()%10;
-	l->pr = rand()%10;
+	l->in_io = false;
+	while (l->pr<=0) l->pr = rand()%10;;
+	printf("[ETE %.1fms] Processo %d chegou na fila Arrive com Tamanho: %d e Priodidade: %d\n", (double)(clock()), l->id, l->tam, l->pr);
 	l->prox = NULL;
 	
 	if(f->fim != NULL)
@@ -104,25 +104,25 @@ Lista* lst_cria(void){
 	return NULL;
 }
 
-// inserção no início: retorna a lista atualizada 
-Lista* lst_insere(Lista* l, Process* p){
-	Lista* novo, *aux = (Lista*) malloc(sizeof(Lista));
-	novo->pr = p->pr;
-	novo->prox = l;
-	novo->ant = NULL;
-	aux = novo;
-	while (aux->prox != NULL)
-	{
-		aux->ini = novo;
-		aux = aux->prox;
-	}
-	aux = aux->ini;
-	novo = aux;
-	if(l != NULL)
-		l->ant = novo;
+// // inserção no início: retorna a lista atualizada 
+// Lista* lst_insere(Lista* l, Process* p){
+// 	Lista* novo, *aux = (Lista*) malloc(sizeof(Lista));
+// 	novo->pr = p->pr;
+// 	novo->prox = l;
+// 	novo->ant = NULL;
+// 	aux = novo;
+// 	while (aux->prox != NULL)
+// 	{
+// 		aux->ini = novo;
+// 		aux = aux->prox;
+// 	}
+// 	aux = aux->ini;
+// 	novo = aux;
+// 	if(l != NULL)
+// 		l->ant = novo;
 
-	return novo;
-}
+// 	return novo;
+// }
 
 /* 
 // inserção no fim: retorna a lista atualizada 
@@ -228,19 +228,21 @@ void lst_desaloca(Lista* l){
 //         printf("Erro ao alocar memoria!\n");
 // }
 
-/*
-Lista* insere_crescente(Lista* l, int pr){
+
+Lista* insere_crescente(Lista* l, Process* proc){
 	Lista* p = l;
 	Lista* ant = NULL;
 	
-	while(p != NULL && p->pr < pr){
+	
+	while(p != NULL && p->pr < proc->pr){
 		ant = p;
 		p = p->prox;
 	}
 	
 	Lista* novo = (Lista*) malloc(sizeof(Lista));
-	novo->pr = pr;
-	
+	novo->p = proc;
+	novo->pr = proc->pr;
+	printf("[ETE %.1fms] Processo %d inserido com sucesso na fila dupla encadeada com prioridade %d \n", (double)(clock()), novo->p->id, novo->pr );
 	if(ant == NULL){ //insere no inicio
 		novo->prox = l;
 		l = novo;
@@ -252,4 +254,4 @@ Lista* insere_crescente(Lista* l, int pr){
 		
 	return l;
 }
-*/
+
