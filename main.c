@@ -5,8 +5,10 @@
 #include <unistd.h>
 #include "filas.h"
 #include "untils.h"
-
 clock_t begin;
+
+
+
 // Processo é gerado e chega na arrive queue
 // Tem espaço no Systema?  Tenta usar a CPU; Não tem ? espera na arrive até liberar.
 // se a cpu estiver sendo utilizada Puxa pra Fila queue (FIFO)
@@ -36,13 +38,13 @@ Process* cpu(Process* p, int time_slice){
 void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo){
     Process* p = fila_retira(r);
     fila_imprime(r);
-    printf("\nProcess ID: %d\nQtd Slices: %d\n", p->id, p->tam);
-    if(p == NULL) {fila_insere_arrive(a); arrive_to_ready(r, a);}
+    printf("\n[ETE %.1fs] Process ID: %d\nQtd Slices: %d\n", (double)(clock() - begin),p->id, p->tam);
+    if(p == NULL) {fila_insere_arrive(a); printf("[ETE %.1fs] Processo timido (nome e id desconhecidos ainda) chegou na fila Arrive com prioridade e tamanho\n", (double)(clock() - begin)); arrive_to_ready(r, a);}
     while (tempo_maximo != 0){      
         p = cpu(p, time_slice);
-        if(p->tam > 0) {fila_insere_ready(r, p); printf("[Execution time: %.1f seconds] Restam %d Slices para encerrar o processo %d\n", (double)(clock() - begin), p->tam, p->id);} else printf("[Execution time: %.1f seconds]  Processo %d encerrado\n", (double)(clock() - begin),p->id);
-        printf("\n");
-        if(p->prox == NULL) for(int i = 0; i < rand()%10; i++) {fila_insere_arrive(a); printf("b.o tam"); arrive_to_ready(r, a);}
+        if(p->tam > 0) {fila_insere_ready(r, p); printf("[ETE %.1fs] Restam %d Slices para encerrar o processo %d\n", (double)(clock() - begin), p->tam, p->id);} else printf("[ETE %.1fs] Processo %d encerrado\n", (double)(clock() - begin),p->id);
+        //printf("\n");
+        if(p->prox == NULL) for(int i = 0; i < rand()%10; i++) {fila_insere_arrive(a); arrive_to_ready(r, a);}
         p = fila_retira(r);
         tempo_maximo--;
     }
@@ -57,6 +59,7 @@ void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo){
 void imprime_filas(Fila* r, Fila* a, int time_slice, int tempo_maximo){
     for (int i = 0; i < rand() %10; i++) {
         fila_insere_arrive(a);
+        printf("[ETE %.1fs] Processo timido (nome e id desconhecidos ainda) chegou na fila Arrive com prioridade e tamanho\n", (double)(clock() - begin));
         }
     fila_imprime(a);
     arrive_to_ready(r, a);
@@ -69,15 +72,15 @@ int main(int argc, char* argv[]) {
         printf("Uso: ./filename <NUM_MAX_DE_PROCESSOS\n");
         return 1;
     }
-    begin = clock();
+    //begin = clock();
     Fila* arrive_queue = fila_cria();
     Fila* ready_queue = fila_cria();
     int tempo_maximo = 100;
     int time_slice = 2;
-
-    printf("Estado atual de filas:\n");
+    
+    printf("[ETE %.1fs] Filas Criadas, exibindo estado atual:\n", (double)(clock() - begin));
     imprime_filas(ready_queue, arrive_queue, time_slice, tempo_maximo);
-    printf("\n -- INICIANDO PROCESSAMENTO --");
+    printf("\n [ETE %.1fs] -- INICIANDO PROCESSAMENTO --",(double)(clock() - begin));
     processa_ready(ready_queue, arrive_queue, time_slice, tempo_maximo);
     return 0;
 }

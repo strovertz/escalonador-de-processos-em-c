@@ -13,11 +13,6 @@ typedef struct lista{
 	struct lista* prox;
 }Process;
 
-// typedef struct Fila{
-// 	Process* ini;
-// 	Process* fim;
-// }Fila;
-
 typedef struct Fila{
     Process* ini;
     Process* fim;

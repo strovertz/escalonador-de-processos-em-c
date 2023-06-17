@@ -4,6 +4,8 @@
 #include <string.h>
 #include <time.h>
 #include "filas.h"
+#include "untils.h"
+
 
 Fila* fila_cria(void){
 	Fila* f = (Fila*) malloc(sizeof(Fila));
@@ -51,7 +53,7 @@ void fila_insere_arrive(Fila* f){
 	while (l->tam<=0) l->tam = rand()%10;
 	l->pr = rand()%10;
 	l->prox = NULL;
-
+	
 	if(f->fim != NULL)
 		f->fim->prox = l;
 	else
