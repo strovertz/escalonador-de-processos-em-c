@@ -6,8 +6,7 @@
 #include "filas.h"
 #include "untils.h"
 
-int CONT = 0;
-
+clock_t begin;
 // Processo é gerado e chega na arrive queue
 // Tem espaço no Systema?  Tenta usar a CPU; Não tem ? espera na arrive até liberar.
 // se a cpu estiver sendo utilizada Puxa pra Fila queue (FIFO)
@@ -25,15 +24,12 @@ int CONT = 0;
 // Meta 2 - Implementar laço para ficar processando os proximos processos (ué kkk)
 
 Process* cpu(Process* p, int time_slice){
-    clock_t begin = clock();
     if(p->tam < time_slice) {
         usleep(p->tam);
         p->tam = 0;
-        CONT+=p->tam;
         return p;
     } else usleep(time_slice);
     p->tam = p->tam - time_slice;
-    CONT+=time_slice;
     return p;
 }
 
@@ -41,15 +37,21 @@ void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo){
     Process* p = fila_retira(r);
     fila_imprime(r);
     printf("\nProcess ID: %d\nQtd Slices: %d\n", p->id, p->tam);
-    if(p == NULL) {fila_insere_arrive(a); arrive_to_ready(r, a); CONT+=1;}
+    if(p == NULL) {fila_insere_arrive(a); arrive_to_ready(r, a);}
     while (tempo_maximo != 0){      
         p = cpu(p, time_slice);
-        if(p->tam > 0) {fila_insere_ready(r, p); printf("Restam %d Slices para encerrar o processo %d\n", p->tam, p->id); CONT+=1;} else printf("Processo %d encerrado\n", p->id);
+        if(p->tam > 0) {fila_insere_ready(r, p); printf("[Execution time: %.1f seconds] Restam %d Slices para encerrar o processo %d\n", (double)(clock() - begin), p->tam, p->id);} else printf("[Execution time: %.1f seconds]  Processo %d encerrado\n", (double)(clock() - begin),p->id);
         printf("\n");
         if(p->prox == NULL) for(int i = 0; i < rand()%10; i++) {fila_insere_arrive(a); printf("b.o tam"); arrive_to_ready(r, a);}
         p = fila_retira(r);
         tempo_maximo--;
     }
+    if (tempo_maximo == 0)
+    {
+        printf("\n Tempo Max de Execucao Alcancado \n");
+        printf("\n Tempo atual: ");
+    }
+    
 }
 
 void imprime_filas(Fila* r, Fila* a, int time_slice, int tempo_maximo){
@@ -67,6 +69,7 @@ int main(int argc, char* argv[]) {
         printf("Uso: ./filename <NUM_MAX_DE_PROCESSOS\n");
         return 1;
     }
+    begin = clock();
     Fila* arrive_queue = fila_cria();
     Fila* ready_queue = fila_cria();
     int tempo_maximo = 100;
