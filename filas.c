@@ -26,7 +26,7 @@ int fila_tam(Fila* f){
 	return tam;
 }
 
-void ready_insere(Fila* r, Process* n){
+void fila_insere_ready(Fila* r, Process* n){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = n->queuetime;
     l->id = n->id;
@@ -42,7 +42,7 @@ void ready_insere(Fila* r, Process* n){
 	r->fim = l;
 }
 
-void fila_insere(Fila* f){
+void fila_insere_arrive(Fila* f){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = clock();
     l->id = rand()%90;

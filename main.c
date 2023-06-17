@@ -39,12 +39,12 @@ void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo){
     Process* p = fila_retira(r);
     fila_imprime(r);
     printf("\nProcess ID: %d\nQtd Slices: %d\n", p->id, p->tam);
-    if(p == NULL) {fila_insere(a); arrive_to_ready(r, a);}
+    if(p == NULL) {fila_insere_arrive(a); arrive_to_ready(r, a);}
     while (tempo_maximo != 0){      
         p = cpu(p, time_slice);
-        if(p->tam > 0) {ready_insere(r, p); printf("Restam %d Slices para encerrar o processo %d\n", p->tam, p->id);} else printf("Processo %d encerrado\n", p->id);
+        if(p->tam > 0) {fila_insere_ready(r, p); printf("Restam %d Slices para encerrar o processo %d\n", p->tam, p->id);} else printf("Processo %d encerrado\n", p->id);
         printf("\n");
-        if(p->prox == NULL) for(int i = 0; i < rand()%10; i++) {arrive_insere(a); printf("b.o tam"); arrive_to_ready(r, a);}
+        if(p->prox == NULL) for(int i = 0; i < rand()%10; i++) {fila_insere_arrive(a); printf("b.o tam"); arrive_to_ready(r, a);}
         p = fila_retira(r);
         tempo_maximo--;
     }
@@ -52,7 +52,7 @@ void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo){
 
 void imprime_filas(Fila* r, Fila* a, int time_slice, int tempo_maximo){
     for (int i = 0; i < rand() %10; i++) {
-        arrive_insere(a);
+        fila_insere_arrive(a);
         }
     fila_imprime(a);
     arrive_to_ready(r, a);

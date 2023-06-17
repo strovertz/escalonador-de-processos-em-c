@@ -25,16 +25,9 @@ typedef struct Fila{
 
 Fila* fila_cria(void);
 int fila_tam(Fila* f);
-void fila_insere_arrive(Fila* f);
-// Process* Fila_retira(Fila* f);
-// void Fila_imprime(Fila* f);
-// int Fila_vazia(Fila* f);
-// void Fila_libera(Fila* f);
-
-//Fila* Fila_cria(void);
-// int Fila_tam(Fila * f);
 void fila_insere_ready(Fila* f, Process* n);
-// Process* Fila_retira(Fila* f);
-// void Fila_imprime(Fila* f);
-// int Fila_vazia(Fila* f);
-// void Fila_libera(Fila* f);
+void fila_insere_arrive(Fila* f);
+Process* fila_retira(Fila* f);
+void fila_imprime(Fila* f);
+int fila_vazia(Fila* f);
+void fila_libera(Fila* f);
