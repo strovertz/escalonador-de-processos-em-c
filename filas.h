@@ -18,6 +18,22 @@ typedef struct Fila{
     Process* fim;
 }Fila;
 
+typedef struct lista{
+	int pr;
+    Process* p;
+	struct lista* ant;
+	struct lista* prox;
+}Lista;
+
+Lista* lst_cria(void);
+Lista* lst_insere(Lista* l, int v);
+Lista* ultimo (Lista* l);
+Lista* lst_retira_ant (Lista* l, int v);
+Lista* lst_busca(Lista* l, int v);
+void lst_imprime(Lista *l);
+void lst_desaloca(Lista* l);	
+
+
 Fila* fila_cria(void);
 int fila_tam(Fila* f);
 void fila_insere_ready(Fila* f, Process* n);

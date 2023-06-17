@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "listas.h"
+#include "filas.h"
 
 Lista* lst_cria(void){
 	return NULL;
@@ -98,6 +98,31 @@ void lst_desaloca(Lista* l){
 	}
 }
 
+void inserir_ordenado(Lista *p_io, int num){
+    Lista *aux, *novo = malloc(sizeof(Lista));
+
+    if(novo){
+        novo->valor = num;
+        if(p_io>inicio == NULL){
+            novo->proximo = NULL;
+            p_io->inicio = novo;
+        }
+        else if(novo->valor < p_io->inicio->valor){
+            novo->proximo = p_io->inicio;
+            p_io->inicio = novo;
+        }
+        else{
+            aux = p_io->inicio;
+            while(aux->proximo && novo->valor > aux->proximo->valor)
+                aux = aux->proximo;
+            novo->proximo = aux->proximo;
+            aux->proximo = novo;
+        }
+        p_io->tam++;
+    }
+    else
+        printf("Erro ao alocar memoria!\n");
+}
 
 /*
 Lista* insere_crescente(Lista* l, int valor){

@@ -35,6 +35,12 @@ Process* cpu(Process* p, int time_slice){
     return p;
 }
 
+Process* io(Lista* l){
+    
+
+}
+
+
 void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo){
     Process* p = fila_retira(r);
     fila_imprime(r);
