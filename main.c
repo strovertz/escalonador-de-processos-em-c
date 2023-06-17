@@ -52,6 +52,7 @@ void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo){
     {
         printf("\n Tempo Max de Execucao Alcancado \n");
         printf("\n Tempo atual: ");
+        printf("teste");
     }
     
 }
