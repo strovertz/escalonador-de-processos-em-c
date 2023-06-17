@@ -9,31 +9,32 @@ typedef struct lista{
     int tam;
     int queuetime;
     bool IO;
+    int pr;
 	struct lista* prox;
 }Process;
 
-typedef struct arrive{
-	Process* ini;
-	Process* fim;
-}Arrive;
+// typedef struct Fila{
+// 	Process* ini;
+// 	Process* fim;
+// }Fila;
 
-typedef struct ready{
+typedef struct Fila{
     Process* ini;
     Process* fim;
-}Ready;
+}Fila;
 
-Arrive* arrive_cria(void);
-int arrive_tam(Arrive* f);
-void arrive_insere(Arrive* f);
-Process* arrive_retira(Arrive* f);
-void arrive_imprime(Arrive* f);
-int arrive_vazia(Arrive* f);
-void arrive_libera(Arrive* f);
+Fila* fila_cria(void);
+int fila_tam(Fila* f);
+void fila_insere_arrive(Fila* f);
+// Process* Fila_retira(Fila* f);
+// void Fila_imprime(Fila* f);
+// int Fila_vazia(Fila* f);
+// void Fila_libera(Fila* f);
 
-Ready* ready_cria(void);
-int ready_tam(Ready * f);
-void ready_insere(Ready* f, Process* n);
-Process* ready_retira(Ready* f);
-void ready_imprime(Ready* f);
-int ready_vazia(Ready* f);
-void ready_libera(Ready* f);
+//Fila* Fila_cria(void);
+// int Fila_tam(Fila * f);
+void fila_insere_ready(Fila* f, Process* n);
+// Process* Fila_retira(Fila* f);
+// void Fila_imprime(Fila* f);
+// int Fila_vazia(Fila* f);
+// void Fila_libera(Fila* f);

@@ -6,9 +6,11 @@
 #include "filas.h"
 #include "untils.h"
 
+int CONT = 0;
+
 // Processo é gerado e chega na arrive queue
 // Tem espaço no Systema?  Tenta usar a CPU; Não tem ? espera na arrive até liberar.
-// se a cpu estiver sendo utilizada Puxa pra Ready queue (FIFO)
+// se a cpu estiver sendo utilizada Puxa pra Fila queue (FIFO)
 // Senão, caso esteja livre, processa o time slice, 
 // Não tem ? espera na arrive até liberar.
 
@@ -19,7 +21,7 @@
 // IF - Processo solicita IO, retira ele da CPU e aloca no dispositivo de IO,
 // - SE O DISPotivo de IO tiver ocupado, espera na fila de dispositivos (IO/QUeue - Fila dupla encadeada, ordem de prioridade)
 
-// Meta 1 - Fazer as filas. | Ready e Arrive = OK 
+// Meta 1 - Fazer as filas. | Fila e Fila = OK 
 // Meta 2 - Implementar laço para ficar processando os proximos processos (ué kkk)
 
 Process* cpu(Process* p, int time_slice){
@@ -33,28 +35,28 @@ Process* cpu(Process* p, int time_slice){
     return p;
 }
 
-void processa_ready(Ready* r, Arrive * a,  int time_slice, int tempo_maximo){
-    Process* p = ready_retira(r);
-    ready_imprime(r);
+void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo){
+    Process* p = fila_retira(r);
+    fila_imprime(r);
     printf("\nProcess ID: %d\nQtd Slices: %d\n", p->id, p->tam);
-    if(p == NULL) {arrive_insere(a); arrive_to_ready(r, a);}
+    if(p == NULL) {fila_insere(a); arrive_to_ready(r, a);}
     while (tempo_maximo != 0){      
         p = cpu(p, time_slice);
         if(p->tam > 0) {ready_insere(r, p); printf("Restam %d Slices para encerrar o processo %d\n", p->tam, p->id);} else printf("Processo %d encerrado\n", p->id);
         printf("\n");
         if(p->prox == NULL) for(int i = 0; i < rand()%10; i++) {arrive_insere(a); printf("b.o tam"); arrive_to_ready(r, a);}
-        p = ready_retira(r);
+        p = fila_retira(r);
         tempo_maximo--;
     }
 }
 
-void imprime_filas(Ready* r, Arrive* a, int time_slice, int tempo_maximo){
+void imprime_filas(Fila* r, Fila* a, int time_slice, int tempo_maximo){
     for (int i = 0; i < rand() %10; i++) {
         arrive_insere(a);
         }
-    arrive_imprime(a);
+    fila_imprime(a);
     arrive_to_ready(r, a);
-    ready_imprime(r);
+    fila_imprime(r);
     printf("\n");    
 }
 
@@ -63,8 +65,8 @@ int main(int argc, char* argv[]) {
         printf("Uso: ./filename <NUM_MAX_DE_PROCESSOS\n");
         return 1;
     }
-    Arrive* arrive_queue = arrive_cria();
-    Ready* ready_queue = ready_cria();
+    Fila* arrive_queue = fila_cria();
+    Fila* ready_queue = fila_cria();
     int tempo_maximo = 100;
     int time_slice = 2;
 
