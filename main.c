@@ -19,39 +19,42 @@
 // IF - Processo solicita IO, retira ele da CPU e aloca no dispositivo de IO,
 // - SE O DISPotivo de IO tiver ocupado, espera na fila de dispositivos (IO/QUeue - Fila dupla encadeada, ordem de prioridade)
 
-// Meta 1 - Fazer as filas. | Ready e Arrive = OK
+// Meta 1 - Fazer as filas. | Ready e Arrive = OK 
+// Meta 2 - Implementar laço para ficar processando os proximos processos (ué kkk)
 
-Process* cpu(Process* p, int time_slice, int tempo_maximo){
+Process* cpu(Process* p, int time_slice){
     clock_t begin = clock();
-    sleep(time_slice); 
+    if(p->tam < time_slice) {
+        usleep(p->tam);
+        p->tam = 0;
+        return p;
+    } else usleep(time_slice);
     p->tam = p->tam - time_slice;
     return p;
 }
 
-void processa_ready(Ready* r, int time_slice, int tempo_maximo){
+void processa_ready(Ready* r, Arrive * a,  int time_slice, int tempo_maximo){
     Process* p = ready_retira(r);
-    printf("Ready Depois de retirar P");
     ready_imprime(r);
-    printf("Process ID: %d\nTAM ATUAL: %d\n", p->id, p->tam);
-    p = cpu(p, time_slice, tempo_maximo);
-    printf("TAM POS PROCESS: %d\n", p->tam);
-    ready_insere(r, p);
-    printf("depois de inserir p processado\n");
-    ready_imprime(r);
-    printf("\n");
+    printf("\nProcess ID: %d\nQtd Slices: %d\n", p->id, p->tam);
+    if(p == NULL) {arrive_insere(a); arrive_to_ready(r, a);}
+    while (tempo_maximo != 0){      
+        p = cpu(p, time_slice);
+        if(p->tam > 0) {ready_insere(r, p); printf("Restam %d Slices para encerrar o processo %d\n", p->tam, p->id);} else printf("Processo %d encerrado\n", p->id);
+        printf("\n");
+        if(p->prox == NULL) for(int i = 0; i < rand()%10; i++) {arrive_insere(a); printf("b.o tam"); arrive_to_ready(r, a);}
+        p = ready_retira(r);
+        tempo_maximo--;
+    }
 }
 
 void imprime_filas(Ready* r, Arrive* a, int time_slice, int tempo_maximo){
-    for (int i = 0; i < 10; i++) {
-        arrive_insere(a, rand());
+    for (int i = 0; i < rand() %10; i++) {
+        arrive_insere(a);
         }
     arrive_imprime(a);
-    printf("\nTransferindo de Arrive to Ready\n");
     arrive_to_ready(r, a);
-    printf("\nReady Nova: \n");
     ready_imprime(r);
-    printf("\nArrive Nova: \n");
-    arrive_imprime(a);
     printf("\n");    
 }
 
@@ -62,11 +65,12 @@ int main(int argc, char* argv[]) {
     }
     Arrive* arrive_queue = arrive_cria();
     Ready* ready_queue = ready_cria();
-    int tempo_maximo = 10;
+    int tempo_maximo = 100;
     int time_slice = 2;
 
-    printf("Estado atual de filas:");
+    printf("Estado atual de filas:\n");
     imprime_filas(ready_queue, arrive_queue, time_slice, tempo_maximo);
-    processa_ready(ready_queue, time_slice, tempo_maximo);
+    printf("\n -- INICIANDO PROCESSAMENTO --");
+    processa_ready(ready_queue, arrive_queue, time_slice, tempo_maximo);
     return 0;
 }

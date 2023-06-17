@@ -12,6 +12,20 @@ Ready* ready_cria(void){
 	return f;
 }
 
+int ready_tam(Ready* f){
+	int tam;
+	Process *p = f->ini;
+	if (p->prox == NULL)
+	{
+		return 0;
+	}
+	while (p->prox != NULL) 	{
+		tam++;
+	}
+	printf("\nTAMANHO READY -- %d\n", tam);
+	return tam;
+}
+
 void ready_insere(Ready* r, Process* n){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = n->queuetime;

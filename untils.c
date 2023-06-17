@@ -8,4 +8,5 @@
 void* arrive_to_ready(Ready* r, Arrive* a){
     Process* n = arrive_retira(a);
     ready_insere(r, n);
+    printf("\nTransferindo de Arrive to Ready\n");
 }

@@ -12,12 +12,27 @@ Arrive* arrive_cria(void){
 	return f;
 }
 
-void arrive_insere(Arrive* f, int valor){
+int arrive_tam(Arrive* f){
+	int tam;
+	Process *p = f->ini;
+	if (p->prox == NULL)
+	{
+		return 0;
+	}
+	
+	while (p->prox != NULL) 	{
+		tam++;
+	}
+	return tam;
+}
+
+void arrive_insere(Arrive* f){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = clock();
     l->id = rand()%90;
     l->IO = rand()%2;
-	l->tam = rand()%100;
+	l->tam = rand()%10;
+	while (l->tam<=0) l->tam = rand()%10;
 	l->prox = NULL;
 
 	if(f->fim != NULL)
