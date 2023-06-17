@@ -50,6 +50,7 @@ void fila_insere_arrive(Fila* f){
     l->id = rand()%90;
     l->IO = rand()%2;
 	l->tam = rand()%10;
+	l->in_io = false;
 	while (l->tam<=0) l->tam = rand()%10;
 	l->pr = rand()%10;
 	l->prox = NULL;
@@ -104,13 +105,19 @@ Lista* lst_cria(void){
 }
 
 // inserção no início: retorna a lista atualizada 
-Lista* lst_insere(Lista* l, int v){
-	Lista* novo = (Lista*) malloc(sizeof(Lista));
-
-	novo->info = v;
+Lista* lst_insere(Lista* l, Process* p){
+	Lista* novo, *aux = (Lista*) malloc(sizeof(Lista));
+	novo->pr = p->pr;
 	novo->prox = l;
 	novo->ant = NULL;
-
+	aux = novo;
+	while (aux->prox != NULL)
+	{
+		aux->ini = novo;
+		aux = aux->prox;
+	}
+	aux = aux->ini;
+	novo = aux;
 	if(l != NULL)
 		l->ant = novo;
 
@@ -121,7 +128,7 @@ Lista* lst_insere(Lista* l, int v){
 // inserção no fim: retorna a lista atualizada 
 Lista* lst_insere (Lista* l, int i) {
 	Lista* novo = (Lista*) malloc(sizeof(Lista));
-	novo->info = i;
+	novo->pr = i;
 	novo->prox=NULL;
 	Lista* ult = ultimo(l);
 	if (ult==NULL) //lista vazia
@@ -143,7 +150,7 @@ Lista* ultimo (Lista* l) {
 	return p;
 }
 
-// função retira: função que remove o elemento anterior a um elemento de valor v
+// função retira: função que remove o elemento anterior a um elemento de pr v
 Lista* lst_retira_ant (Lista* l, int v){
 	Lista* p = lst_busca(l, v);
 
@@ -170,7 +177,7 @@ Lista* lst_retira_ant (Lista* l, int v){
 Lista* lst_busca(Lista* l, int v){
 	Lista* p = l;
 
-	while(p != NULL && p->info != v)
+	while(p != NULL && p->pr != v)
 		p = p->prox;
 	
 
@@ -180,7 +187,7 @@ Lista* lst_busca(Lista* l, int v){
 void lst_imprime(Lista* l){
 	Lista* p;
 	for(p = l; p != NULL; p = p->prox)
-		printf("%d ", p->info);
+		printf("%d ", p->pr);
 
 	printf("\n");
 }
@@ -195,44 +202,44 @@ void lst_desaloca(Lista* l){
 	}
 }
 
-void inserir_ordenado(Lista *p_io, int num){
-    Lista *aux, *novo = malloc(sizeof(Lista));
+// void inserir_ordenado(Lista *p_io, int num){
+//     Lista *aux, *novo = malloc(sizeof(Lista));
 
-    if(novo){
-        novo->valor = num;
-        if(p_io>inicio == NULL){
-            novo->proximo = NULL;
-            p_io->inicio = novo;
-        }
-        else if(novo->valor < p_io->inicio->valor){
-            novo->proximo = p_io->inicio;
-            p_io->inicio = novo;
-        }
-        else{
-            aux = p_io->inicio;
-            while(aux->proximo && novo->valor > aux->proximo->valor)
-                aux = aux->proximo;
-            novo->proximo = aux->proximo;
-            aux->proximo = novo;
-        }
-        p_io->tam++;
-    }
-    else
-        printf("Erro ao alocar memoria!\n");
-}
+//     if(novo){
+//         novo->pr = num;
+//         if(p_io>inicio == NULL){
+//             novo->prox = NULL;
+//             p_io->inicio = novo;
+//         }
+//         else if(novo->pr < p_io->inicio->pr){
+//             novo->prox = p_io->inicio;
+//             p_io->inicio = novo;
+//         }
+//         else{
+//             aux = p_io->inicio;
+//             while(aux->prox && novo->pr > aux->prox->pr)
+//                 aux = aux->prox;
+//             novo->prox = aux->prox;
+//             aux->prox = novo;
+//         }
+//         p_io->tam++;
+//     }
+//     else
+//         printf("Erro ao alocar memoria!\n");
+// }
 
 /*
-Lista* insere_crescente(Lista* l, int valor){
+Lista* insere_crescente(Lista* l, int pr){
 	Lista* p = l;
 	Lista* ant = NULL;
 	
-	while(p != NULL && p->info < valor){
+	while(p != NULL && p->pr < pr){
 		ant = p;
 		p = p->prox;
 	}
 	
 	Lista* novo = (Lista*) malloc(sizeof(Lista));
-	novo->info = valor;
+	novo->pr = pr;
 	
 	if(ant == NULL){ //insere no inicio
 		novo->prox = l;

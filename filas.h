@@ -9,6 +9,7 @@ typedef struct lista{
     int tam;
     int queuetime;
     bool IO;
+    bool in_io;
     int pr;
 	struct lista* prox;
 }Process;
@@ -18,15 +19,16 @@ typedef struct Fila{
     Process* fim;
 }Fila;
 
-typedef struct lista{
+typedef struct list{
 	int pr;
     Process* p;
-	struct lista* ant;
-	struct lista* prox;
+    struct list* ini;
+	struct list* ant;
+	struct list* prox;
 }Lista;
 
 Lista* lst_cria(void);
-Lista* lst_insere(Lista* l, int v);
+Lista* lst_insere(Lista* l, Process* p);
 Lista* ultimo (Lista* l);
 Lista* lst_retira_ant (Lista* l, int v);
 Lista* lst_busca(Lista* l, int v);
