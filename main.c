@@ -43,7 +43,6 @@ void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo){
     while (tempo_maximo != 0){      
         p = cpu(p, time_slice);
         if(p->tam > 0) {fila_insere_ready(r, p); printf("[ETE %.1fs] Restam %d Slices para encerrar o processo %d\n", (double)(clock() - begin), p->tam, p->id);} else printf("[ETE %.1fs] Processo %d encerrado\n", (double)(clock() - begin),p->id);
-        //printf("\n");
         if(p->prox == NULL) for(int i = 0; i < rand()%10; i++) {fila_insere_arrive(a); arrive_to_ready(r, a);}
         p = fila_retira(r);
         tempo_maximo--;
