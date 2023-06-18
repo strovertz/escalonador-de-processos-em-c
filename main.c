@@ -23,18 +23,36 @@ clock_t begin;
 // Meta 1 - Fazer as filas. | Fila e Fila = OK 
 // Meta 2 - Implementar laço para ficar processando os proximos processos (ué kkk)
 
-Process* cpu(Process* p, int time_slice, Lista *l){
+// void trace(){
+//     printf("a");
+// }
+
+Process* io(Lista* l, Fila* io){
+    if(l->p == NULL) printf("aqui quebrou");
+   
+    if(io->ini == NULL && io->fim == NULL) {
+        io_to_device(l, io);
+    } 
+    if(rand()%100>75) {
+        io->ini->in_io = true;
+    } 
+    return io->ini;
+}
+
+Process* cpu(Process* p, int time_slice, Lista* l, Fila* io_device){
     if(p->tam < time_slice) {
         usleep(p->tam);
         p->tam = 0;
         return p;
     } else usleep(time_slice);
     if(p->IO == 1)  {
-        int t =rand()%100; 
-        if(t > 75) {
-            printf("[ETE %.1fms] Processo %d solicitou IO\n",  (double)(clock() - begin), p->id); 
-            p->in_io = true;
+        if(rand()%100 > 75) {
+            printf("[ETE %.1fms] Processo %d solicitou IO %d\n",  (double)(clock() - begin), p->id, p->pr); 
             insere_crescente(l, p); 
+            if(rand()%100 > 75) {
+                io(l, io_device);
+                return p; // retorna sem decrementar a time slice
+            };
             p->tam = p->tam - time_slice; 
             return p;
         }
@@ -43,24 +61,21 @@ Process* cpu(Process* p, int time_slice, Lista *l){
     return p;
 }
 
-Process* io(Lista* l){
-
-}
-
-
 void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo, Lista* l){
+     Fila* io_queue = fila_cria();
     Process* p = fila_retira(r);
     fila_imprime(r);
     printf("\n[ETE %.1fms] Process ID: %d\nQtd Slices: %d\n", (double)(clock() - begin),p->id, p->tam);
     if(p == NULL) {fila_insere_arrive(a); printf("[ETE %.1fms]Sem Processos na Fila, Aguardando chegada", (double)(clock() - begin)); arrive_to_ready(r, a);}
     while (tempo_maximo != 0){      
-        p = cpu(p, time_slice, l);
+        p = cpu(p, time_slice, l, io_queue);
         if(p->tam > 0 && !p->in_io) {
-            fila_insere_ready(r, p); 
-            printf("[ETE %.1fms] Restam %d Slices para encerrar o processo %d\n", (double)(clock() - begin), p->tam, p->id);
+            fila_insere_processo(r, p); 
+            printf("[ETE %.1fms] Restam %d Slices para encerrar o processo %d PR %d\n", (double)(clock() - begin), p->tam, p->id, p->pr);
         } else if (!p->in_io) { 
             printf("[ETE %.1fms] Processo %d encerrado\n", (double)(clock() - begin),p->id);
         } else printf("[ETE %.1fms] Processo %d em I/O\n",  (double)(clock() - begin), p->id); // Gerar Rand para caso caia em determinado numero processe a fila de i/o  
+        if(rand()%300>256) fila_insere_arrive(a);
         if(p->prox == NULL){
             for(int i = 0; i < rand()%10; i++) {
                 fila_insere_arrive(a); 

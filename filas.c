@@ -28,12 +28,13 @@ int fila_tam(Fila* f){
 	return tam;
 }
 
-void fila_insere_ready(Fila* r, Process* n){
+void fila_insere_processo(Fila* r, Process* n){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = n->queuetime;
     l->id = n->id;
     l->IO = n->IO;
     l->tam = n->tam;
+	l->pr = n->pr;
 	l->prox = NULL;
 
 	if(r->fim != NULL)
@@ -99,8 +100,8 @@ void fila_libera(Fila* f){
 	free(f);
 }	
 
-
 Lista* lst_cria(void){
+
 	return NULL;
 }
 
@@ -141,13 +142,14 @@ Lista* lst_insere (Lista* l, int i) {
 */
 
 // retorna ultimo elemento da lista
-Lista* ultimo (Lista* l) {
+Process* ultimo (Lista* l) {
 	Lista* p = l;
 	if (p != NULL) {
 		while (p->prox != NULL)
 			p= p->prox;
 	}
-	return p;
+	if(p->p == NULL ) printf("deu pau"); exit(0);
+	return p->p;
 }
 
 // função retira: função que remove o elemento anterior a um elemento de pr v
@@ -229,29 +231,40 @@ void lst_desaloca(Lista* l){
 // }
 
 
-Lista* insere_crescente(Lista* l, Process* proc){
-	Lista* p = l;
-	Lista* ant = NULL;
+Lista* insere_crescente(Lista* l, Process* proc) {
+    Lista* p = (Lista*)malloc(sizeof(Lista));
+	p = l;
+    Lista* ant = NULL;
+    Process* prc = (Process*)malloc(sizeof(Process));
+	prc = proc;
+    while (p != NULL && p->pr < prc->pr) {
+        ant = p;
+        p = p->prox;
+    }
+
+    Lista* novo = (Lista*)malloc(sizeof(Lista));
+    novo->p = prc;
+    novo->pr = prc->pr;
+    novo->ant = NULL; // Initialize ant pointer to NULL
+    novo->prox = NULL; // Initialize prox pointer to NULL
+
+    printf("[ETE %.1fms] Processo %d inserido com sucesso na fila dupla encadeada com prioridade %d\n", (double)(clock()), novo->p->id, novo->pr);
 	
-	
-	while(p != NULL && p->pr < proc->pr){
-		ant = p;
-		p = p->prox;
-	}
-	
-	Lista* novo = (Lista*) malloc(sizeof(Lista));
-	novo->p = proc;
-	novo->pr = proc->pr;
-	printf("[ETE %.1fms] Processo %d inserido com sucesso na fila dupla encadeada com prioridade %d \n", (double)(clock()), novo->p->id, novo->pr );
-	if(ant == NULL){ //insere no inicio
-		novo->prox = l;
-		l = novo;
-	}
-	else{ //insere meio ou fim
-		novo->prox = ant->prox;
-		ant->prox = novo;
-	}
-		
-	return l;
+    if (ant == NULL) { // insere no início
+        novo->prox = l;
+        if (l != NULL) {
+            l->ant = novo;
+        }
+        l = novo;
+    } else { // insere meio ou fim
+        novo->prox = ant->prox;
+        if (novo->prox != NULL) {
+            novo->prox->ant = novo;
+        }
+        ant->prox = novo;
+        novo->ant = ant;
+    }
+	 
+    return l;
 }
 
