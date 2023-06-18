@@ -8,7 +8,7 @@
 clock_t begin;
 
 Process* io(Lista* l, Fila* io){
-    if(l->p == NULL) trace_print(0);
+    if(l->p == NULL) trace_print(0, 0, 0);
     if(io->ini == NULL && io->fim == NULL) {
         io_to_device(l, io);
     } 
@@ -26,7 +26,7 @@ Process* cpu(Process* p, int time_slice, Lista* l, Fila* io_device){
     } else usleep(time_slice);
     if(p->IO == 1)  {
         if(rand()%100 > 75) {
-            
+            trace_print(8, p->id, p->pr);
             insere_crescente(l, p); 
             if(rand()%100 > 75) {
                 io(l, io_device);
@@ -54,9 +54,9 @@ void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo, Lista*
         p = cpu(p, time_slice, l, io_queue);
         if(p->tam > 0 && !p->in_io) {
             fila_insere_processo(r, p); 
-            trace_print(5,0,0);
+            trace_print(5,p->id,p->tam);
         } else if (!p->in_io) { 
-            trace_print(6,p->id);
+            trace_print(6,p->id,0);
         } else trace_print(7,p->id,0);
         if(rand()%300>256) fila_insere_arrive(a);
         if(p->prox == NULL){
