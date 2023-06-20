@@ -1,0 +1,296 @@
+[ETE 421.0ms] Filas Criadas, exibindo estado atual:
+[ETE 506.0ms] Processo 16 chegou na fila Arrive com Tamanho: 26
+[ETE 516.0ms] Processo 46 chegou na fila Arrive com Tamanho: 10
+[ETE 532.0ms]  Processo 16 migrou para fila Ready
+
+[ETE 549.0ms] -- INICIANDO PROCESSAMENTO --
+[ETE 557.0ms] Process ID: 16 | Qtd Slices: 26
+[ETE 571.0ms] Restam 24 Slices para encerrar o processo 16
+[ETE 582.0ms] Processo 79 chegou na fila Arrive com Tamanho: 17
+[ETE 587.0ms] Processo 52 chegou na fila Arrive com Tamanho: 12
+[ETE 592.0ms]  Processo 46 migrou para fila Ready
+[ETE 597.0ms] Processo 69 chegou na fila Arrive com Tamanho: 21
+[ETE 602.0ms]  Processo 79 migrou para fila Ready
+[ETE 607.0ms] Processo 37 chegou na fila Arrive com Tamanho: 30
+[ETE 612.0ms]  Processo 52 migrou para fila Ready
+[ETE 619.0ms] Restam 22 Slices para encerrar o processo 16
+[ETE 627.0ms] Processo 57 chegou na fila Arrive com Tamanho: 17
+[ETE 667.0ms] Restam 8 Slices para encerrar o processo 46
+[ETE 685.0ms] Restam 15 Slices para encerrar o processo 79
+[ETE 693.0ms] Processo 81 chegou na fila Arrive com Tamanho: 15
+[ETE 701.0ms] Restam 10 Slices para encerrar o processo 52
+[ETE 709.0ms] Restam 20 Slices para encerrar o processo 16
+[ETE 718.0ms] Restam 6 Slices para encerrar o processo 46
+[ETE 724.0ms] Processo 83 chegou na fila Arrive com Tamanho: 2
+[ETE 731.0ms] Restam 13 Slices para encerrar o processo 79
+[ETE 738.0ms] Processo 32 chegou na fila Arrive com Tamanho: 17
+[ETE 745.0ms] Restam 8 Slices para encerrar o processo 52
+[ETE 753.0ms] Restam 18 Slices para encerrar o processo 16
+[ETE 760.0ms] Processo 87 chegou na fila Arrive com Tamanho: 6
+[ETE 767.0ms] Restam 4 Slices para encerrar o processo 46
+[ETE 776.0ms] Restam 11 Slices para encerrar o processo 79
+[ETE 783.0ms] Processo 54 chegou na fila Arrive com Tamanho: 13
+[ETE 791.0ms] Restam 6 Slices para encerrar o processo 52
+[ETE 800.0ms] Restam 16 Slices para encerrar o processo 16
+[ETE 809.0ms] Restam 2 Slices para encerrar o processo 46
+[ETE 817.0ms] Restam 9 Slices para encerrar o processo 79
+[ETE 826.0ms] Restam 4 Slices para encerrar o processo 52
+[ETE 838.0ms] Restam 14 Slices para encerrar o processo 16
+[ETE 849.0ms] Processo 8 chegou na fila Arrive com Tamanho: 25
+[ETE 857.0ms] Processo 46 encerrado
+[ETE 867.0ms] Restam 7 Slices para encerrar o processo 79
+[ETE 876.0ms] Restam 2 Slices para encerrar o processo 52
+[ETE 885.0ms] Restam 12 Slices para encerrar o processo 16
+[ETE 897.0ms] Restam 5 Slices para encerrar o processo 79
+[ETE 911.0ms] Processo 52 encerrado
+[ETE 929.0ms] Restam 10 Slices para encerrar o processo 16
+[ETE 946.0ms] Processo 79 solicitou IO - Valor de Prioridade: 1
+[ETE 957.0ms] Restam 3 Slices para encerrar o processo 79
+[ETE 969.0ms] Restam 8 Slices para encerrar o processo 16
+[ETE 984.0ms] Processo 79 solicitou IO - Valor de Prioridade: 1
+[ETE 995.0ms] Restam 1 Slices para encerrar o processo 79
+[ETE 1007.0ms] Processo 16 solicitou IO - Valor de Prioridade: 4
+[ETE 1018.0ms] Restam 6 Slices para encerrar o processo 16
+[ETE 1037.0ms] Processo 79 encerrado
+[ETE 1069.0ms] Restam 4 Slices para encerrar o processo 16
+[ETE 1089.0ms] Processo 20 chegou na fila Arrive com Tamanho: 2
+[ETE 1100.0ms]  Processo 69 migrou para fila Ready
+[ETE 1111.0ms] Processo 64 chegou na fila Arrive com Tamanho: 11
+[ETE 1121.0ms]  Processo 37 migrou para fila Ready
+[ETE 1135.0ms] Restam 2 Slices para encerrar o processo 16
+[ETE 1149.0ms] Processo 11 chegou na fila Arrive com Tamanho: 6
+[ETE 1217.0ms] Restam 19 Slices para encerrar o processo 69
+[ETE 1242.0ms] Restam 28 Slices para encerrar o processo 37
+[ETE 1256.0ms] Processo 16 solicitou IO - Valor de Prioridade: 4
+[ETE 1266.0ms] Processo 16 encerrado
+[ETE 1278.0ms] Restam 17 Slices para encerrar o processo 69
+[ETE 1297.0ms] Restam 26 Slices para encerrar o processo 37
+[ETE 1318.0ms] Restam 15 Slices para encerrar o processo 69
+[ETE 1334.0ms] Restam 24 Slices para encerrar o processo 37
+[ETE 1350.0ms] Restam 13 Slices para encerrar o processo 69
+[ETE 1361.0ms] Restam 22 Slices para encerrar o processo 37
+[ETE 1370.0ms] Restam 11 Slices para encerrar o processo 69
+[ETE 1390.0ms] Restam 20 Slices para encerrar o processo 37
+[ETE 1398.0ms] Processo 18 chegou na fila Arrive com Tamanho: 6
+[ETE 1406.0ms] Restam 9 Slices para encerrar o processo 69
+[ETE 1419.0ms] Processo 37 solicitou IO - Valor de Prioridade: 3
+[ETE 1432.0ms] Restam 18 Slices para encerrar o processo 37
+[ETE 1447.0ms] Restam 7 Slices para encerrar o processo 69
+[ETE 1470.0ms] Restam 16 Slices para encerrar o processo 37
+[ETE 1491.0ms] Restam 5 Slices para encerrar o processo 69
+[ETE 1508.0ms] Restam 14 Slices para encerrar o processo 37
+[ETE 1524.0ms] Restam 3 Slices para encerrar o processo 69
+[ETE 1543.0ms] Restam 12 Slices para encerrar o processo 37
+[ETE 1558.0ms] Restam 1 Slices para encerrar o processo 69
+[ETE 1575.0ms] Restam 10 Slices para encerrar o processo 37
+[ETE 1592.0ms] Processo 69 encerrado
+[ETE 1610.0ms] Restam 8 Slices para encerrar o processo 37
+[ETE 1623.0ms] Processo 34 chegou na fila Arrive com Tamanho: 27
+[ETE 1631.0ms]  Processo 57 migrou para fila Ready
+[ETE 1643.0ms] Restam 6 Slices para encerrar o processo 37
+[ETE 1654.0ms] Processo 9 chegou na fila Arrive com Tamanho: 23
+[ETE 1664.0ms] Restam 15 Slices para encerrar o processo 57
+[ETE 1680.0ms] Restam 4 Slices para encerrar o processo 37
+[ETE 1717.0ms] Restam 13 Slices para encerrar o processo 57
+[ETE 1735.0ms] Restam 2 Slices para encerrar o processo 37
+[ETE 1751.0ms] Processo 89 chegou na fila Arrive com Tamanho: 16
+[ETE 1774.0ms] Restam 11 Slices para encerrar o processo 57
+[ETE 1803.0ms] Processo 37 encerrado
+[ETE 1826.0ms] Restam 9 Slices para encerrar o processo 57
+[ETE 1846.0ms] Processo 64 chegou na fila Arrive com Tamanho: 14
+[ETE 1860.0ms]  Processo 81 migrou para fila Ready
+[ETE 1872.0ms] Processo 86 chegou na fila Arrive com Tamanho: 5
+[ETE 1885.0ms]  Processo 83 migrou para fila Ready
+[ETE 1897.0ms] Processo 18 chegou na fila Arrive com Tamanho: 28
+[ETE 1906.0ms]  Processo 32 migrou para fila Ready
+[ETE 1918.0ms] Processo 74 chegou na fila Arrive com Tamanho: 1
+[ETE 1929.0ms]  Processo 87 migrou para fila Ready
+[ETE 1948.0ms] Processo 57 solicitou IO - Valor de Prioridade: 2
+[ETE 1971.0ms] Restam 7 Slices para encerrar o processo 57
+[ETE 1991.0ms] Restam 13 Slices para encerrar o processo 81
+[ETE 2007.0ms] Processo 83 encerrado
+[ETE 2026.0ms] Restam 15 Slices para encerrar o processo 32
+[ETE 2043.0ms] Restam 4 Slices para encerrar o processo 87
+[ETE 2056.0ms] Processo 57 solicitou IO - Valor de Prioridade: 2
+[ETE 2068.0ms] Restam 5 Slices para encerrar o processo 57
+[ETE 2079.0ms] Restam 11 Slices para encerrar o processo 81
+[ETE 2092.0ms] Restam 13 Slices para encerrar o processo 32
+[ETE 2103.0ms] Restam 2 Slices para encerrar o processo 87
+[ETE 2118.0ms] Restam 3 Slices para encerrar o processo 57
+[ETE 2132.0ms] Restam 9 Slices para encerrar o processo 81
+[ETE 2156.0ms] Restam 11 Slices para encerrar o processo 32
+[ETE 2166.0ms] Processo 87 encerrado
+[ETE 2175.0ms] Processo 57 solicitou IO - Valor de Prioridade: 2
+[ETE 2182.0ms] Restam 1 Slices para encerrar o processo 57
+[ETE 2191.0ms] Restam 7 Slices para encerrar o processo 81
+[ETE 2202.0ms] Restam 9 Slices para encerrar o processo 32
+[ETE 2214.0ms] Processo 57 encerrado
+[ETE 2229.0ms] Restam 5 Slices para encerrar o processo 81
+[ETE 2242.0ms] Restam 7 Slices para encerrar o processo 32
+[ETE 2251.0ms] Restam 3 Slices para encerrar o processo 81
+[ETE 2261.0ms] Restam 5 Slices para encerrar o processo 32
+[ETE 2270.0ms] Restam 1 Slices para encerrar o processo 81
+[ETE 2280.0ms] Restam 3 Slices para encerrar o processo 32
+[ETE 2290.0ms] Processo 81 encerrado
+[ETE 2299.0ms] Restam 1 Slices para encerrar o processo 32
+[ETE 2306.0ms] Processo 35 chegou na fila Arrive com Tamanho: 17
+[ETE 2312.0ms]  Processo 54 migrou para fila Ready
+[ETE 2318.0ms] Processo 14 chegou na fila Arrive com Tamanho: 13
+[ETE 2323.0ms]  Processo 8 migrou para fila Ready
+[ETE 2330.0ms] Processo 32 encerrado
+[ETE 2339.0ms] Restam 11 Slices para encerrar o processo 54
+[ETE 2347.0ms] Processo 69 chegou na fila Arrive com Tamanho: 9
+[ETE 2355.0ms] Restam 23 Slices para encerrar o processo 8
+[ETE 2362.0ms] Processo 71 chegou na fila Arrive com Tamanho: 11
+[ETE 2377.0ms] Processo 54 solicitou IO - Valor de Prioridade: 1
+[ETE 2385.0ms] Restam 9 Slices para encerrar o processo 54
+[ETE 2393.0ms] Restam 21 Slices para encerrar o processo 8
+[ETE 2403.0ms] Processo 54 solicitou IO - Valor de Prioridade: 1
+[ETE 474.0ms] Filas Criadas, exibindo estado atual:
+[ETE 506.0ms] Processo 16 chegou na fila Arrive com Tamanho: 26
+[ETE 520.0ms] Processo 46 chegou na fila Arrive com Tamanho: 10
+[ETE 545.0ms]  Processo 16 migrou para fila Ready
+
+[ETE 568.0ms] -- INICIANDO PROCESSAMENTO --
+[ETE 580.0ms] Process ID: 16 | Qtd Slices: 26
+[ETE 599.0ms] Restam 24 Slices para encerrar o processo 16
+[ETE 612.0ms] Processo 79 chegou na fila Arrive com Tamanho: 17
+[ETE 620.0ms] Processo 52 chegou na fila Arrive com Tamanho: 12
+[ETE 627.0ms]  Processo 46 migrou para fila Ready
+[ETE 634.0ms] Processo 69 chegou na fila Arrive com Tamanho: 21
+[ETE 641.0ms]  Processo 79 migrou para fila Ready
+[ETE 648.0ms] Processo 37 chegou na fila Arrive com Tamanho: 30
+[ETE 654.0ms]  Processo 52 migrou para fila Ready
+[ETE 667.0ms] Restam 22 Slices para encerrar o processo 16
+[ETE 678.0ms] Processo 57 chegou na fila Arrive com Tamanho: 17
+[ETE 688.0ms] Restam 8 Slices para encerrar o processo 46
+[ETE 701.0ms] Restam 15 Slices para encerrar o processo 79
+[ETE 711.0ms] Processo 81 chegou na fila Arrive com Tamanho: 15
+[ETE 720.0ms] Restam 10 Slices para encerrar o processo 52
+[ETE 732.0ms] Restam 20 Slices para encerrar o processo 16
+[ETE 744.0ms] Restam 6 Slices para encerrar o processo 46
+[ETE 754.0ms] Processo 83 chegou na fila Arrive com Tamanho: 2
+[ETE 763.0ms] Restam 13 Slices para encerrar o processo 79
+[ETE 773.0ms] Processo 32 chegou na fila Arrive com Tamanho: 17
+[ETE 783.0ms] Restam 8 Slices para encerrar o processo 52
+[ETE 794.0ms] Restam 18 Slices para encerrar o processo 16
+[ETE 804.0ms] Processo 87 chegou na fila Arrive com Tamanho: 6
+[ETE 813.0ms] Restam 4 Slices para encerrar o processo 46
+[ETE 825.0ms] Restam 11 Slices para encerrar o processo 79
+[ETE 835.0ms] Processo 54 chegou na fila Arrive com Tamanho: 13
+[ETE 844.0ms] Restam 6 Slices para encerrar o processo 52
+[ETE 856.0ms] Restam 16 Slices para encerrar o processo 16
+[ETE 873.0ms] Restam 2 Slices para encerrar o processo 46
+[ETE 892.0ms] Restam 9 Slices para encerrar o processo 79
+[ETE 905.0ms] Restam 4 Slices para encerrar o processo 52
+[ETE 917.0ms] Restam 14 Slices para encerrar o processo 16
+[ETE 927.0ms] Processo 8 chegou na fila Arrive com Tamanho: 25
+[ETE 936.0ms] Processo 46 encerrado
+[ETE 948.0ms] Restam 7 Slices para encerrar o processo 79
+[ETE 960.0ms] Restam 2 Slices para encerrar o processo 52
+[ETE 972.0ms] Restam 12 Slices para encerrar o processo 16
+[ETE 988.0ms] Restam 5 Slices para encerrar o processo 79
+[ETE 1000.0ms] Processo 52 encerrado
+[ETE 1012.0ms] Restam 10 Slices para encerrar o processo 16
+[ETE 1024.0ms] Processo 79 solicitou IO - Valor de Prioridade: 1
+[ETE 1034.0ms] Restam 3 Slices para encerrar o processo 79
+[ETE 1043.0ms] Restam 8 Slices para encerrar o processo 16
+[ETE 1055.0ms] Processo 79 solicitou IO - Valor de Prioridade: 1
+[ETE 1064.0ms] Restam 1 Slices para encerrar o processo 79
+[ETE 1074.0ms] Processo 16 solicitou IO - Valor de Prioridade: 4
+[ETE 1083.0ms] Restam 6 Slices para encerrar o processo 16
+[ETE 1092.0ms] Processo 79 encerrado
+[ETE 1104.0ms] Restam 4 Slices para encerrar o processo 16
+[ETE 1114.0ms] Processo 20 chegou na fila Arrive com Tamanho: 2
+[ETE 1121.0ms]  Processo 69 migrou para fila Ready
+[ETE 1128.0ms] Processo 64 chegou na fila Arrive com Tamanho: 11
+[ETE 1134.0ms]  Processo 37 migrou para fila Ready
+[ETE 1144.0ms] Restam 2 Slices para encerrar o processo 16
+[ETE 1153.0ms] Processo 11 chegou na fila Arrive com Tamanho: 6
+[ETE 1163.0ms] Restam 19 Slices para encerrar o processo 69
+[ETE 1174.0ms] Restam 28 Slices para encerrar o processo 37
+[ETE 1186.0ms] Processo 16 solicitou IO - Valor de Prioridade: 4
+[ETE 1195.0ms] Processo 16 encerrado
+[ETE 1205.0ms] Restam 17 Slices para encerrar o processo 69
+[ETE 1217.0ms] Restam 26 Slices para encerrar o processo 37
+[ETE 1236.0ms] Restam 15 Slices para encerrar o processo 69
+[ETE 1248.0ms] Restam 24 Slices para encerrar o processo 37
+[ETE 1261.0ms] Restam 13 Slices para encerrar o processo 69
+[ETE 1278.0ms] Restam 22 Slices para encerrar o processo 37
+[ETE 1297.0ms] Restam 11 Slices para encerrar o processo 69
+[ETE 1310.0ms] Restam 20 Slices para encerrar o processo 37
+[ETE 1320.0ms] Processo 18 chegou na fila Arrive com Tamanho: 6
+[ETE 1330.0ms] Restam 9 Slices para encerrar o processo 69
+[ETE 1342.0ms] Processo 37 solicitou IO - Valor de Prioridade: 3
+[ETE 1360.0ms] Restam 18 Slices para encerrar o processo 37
+[ETE 1371.0ms] Restam 7 Slices para encerrar o processo 69
+[ETE 1384.0ms] Restam 16 Slices para encerrar o processo 37
+[ETE 1396.0ms] Restam 5 Slices para encerrar o processo 69
+[ETE 1408.0ms] Restam 14 Slices para encerrar o processo 37
+[ETE 1420.0ms] Restam 3 Slices para encerrar o processo 69
+[ETE 1432.0ms] Restam 12 Slices para encerrar o processo 37
+[ETE 1444.0ms] Restam 1 Slices para encerrar o processo 69
+[ETE 1455.0ms] Restam 10 Slices para encerrar o processo 37
+[ETE 1467.0ms] Processo 69 encerrado
+[ETE 1480.0ms] Restam 8 Slices para encerrar o processo 37
+[ETE 1491.0ms] Processo 34 chegou na fila Arrive com Tamanho: 27
+[ETE 1498.0ms]  Processo 57 migrou para fila Ready
+[ETE 1509.0ms] Restam 6 Slices para encerrar o processo 37
+[ETE 1520.0ms] Processo 9 chegou na fila Arrive com Tamanho: 23
+[ETE 1530.0ms] Restam 15 Slices para encerrar o processo 57
+[ETE 1545.0ms] Restam 4 Slices para encerrar o processo 37
+[ETE 1559.0ms] Restam 13 Slices para encerrar o processo 57
+[ETE 1573.0ms] Restam 2 Slices para encerrar o processo 37
+[ETE 1584.0ms] Processo 89 chegou na fila Arrive com Tamanho: 16
+[ETE 1595.0ms] Restam 11 Slices para encerrar o processo 57
+[ETE 1609.0ms] Processo 37 encerrado
+[ETE 1623.0ms] Restam 9 Slices para encerrar o processo 57
+[ETE 1634.0ms] Processo 64 chegou na fila Arrive com Tamanho: 14
+[ETE 1641.0ms]  Processo 81 migrou para fila Ready
+[ETE 1648.0ms] Processo 86 chegou na fila Arrive com Tamanho: 5
+[ETE 1654.0ms]  Processo 83 migrou para fila Ready
+[ETE 1661.0ms] Processo 18 chegou na fila Arrive com Tamanho: 28
+[ETE 1667.0ms]  Processo 32 migrou para fila Ready
+[ETE 1674.0ms] Processo 74 chegou na fila Arrive com Tamanho: 1
+[ETE 1680.0ms]  Processo 87 migrou para fila Ready
+[ETE 1690.0ms] Processo 57 solicitou IO - Valor de Prioridade: 2
+[ETE 1701.0ms] Restam 7 Slices para encerrar o processo 57
+[ETE 1712.0ms] Restam 13 Slices para encerrar o processo 81
+[ETE 1726.0ms] Processo 83 encerrado
+[ETE 1740.0ms] Restam 15 Slices para encerrar o processo 32
+[ETE 1754.0ms] Restam 4 Slices para encerrar o processo 87
+[ETE 1768.0ms] Processo 57 solicitou IO - Valor de Prioridade: 2
+[ETE 1779.0ms] Restam 5 Slices para encerrar o processo 57
+[ETE 1790.0ms] Restam 11 Slices para encerrar o processo 81
+[ETE 1804.0ms] Restam 13 Slices para encerrar o processo 32
+[ETE 1818.0ms] Restam 2 Slices para encerrar o processo 87
+[ETE 1832.0ms] Restam 3 Slices para encerrar o processo 57
+[ETE 1847.0ms] Restam 9 Slices para encerrar o processo 81
+[ETE 1865.0ms] Restam 11 Slices para encerrar o processo 32
+[ETE 1882.0ms] Processo 87 encerrado
+[ETE 1898.0ms] Processo 57 solicitou IO - Valor de Prioridade: 2
+[ETE 1909.0ms] Restam 1 Slices para encerrar o processo 57
+[ETE 1921.0ms] Restam 7 Slices para encerrar o processo 81
+[ETE 1936.0ms] Restam 9 Slices para encerrar o processo 32
+[ETE 1952.0ms] Processo 57 encerrado
+[ETE 1970.0ms] Restam 5 Slices para encerrar o processo 81
+[ETE 1985.0ms] Restam 7 Slices para encerrar o processo 32
+[ETE 2000.0ms] Restam 3 Slices para encerrar o processo 81
+[ETE 2015.0ms] Restam 5 Slices para encerrar o processo 32
+[ETE 2029.0ms] Restam 1 Slices para encerrar o processo 81
+[ETE 2043.0ms] Restam 3 Slices para encerrar o processo 32
+[ETE 2057.0ms] Processo 81 encerrado
+[ETE 2071.0ms] Restam 1 Slices para encerrar o processo 32
+[ETE 2082.0ms] Processo 35 chegou na fila Arrive com Tamanho: 17
+[ETE 2089.0ms]  Processo 54 migrou para fila Ready
+[ETE 2096.0ms] Processo 14 chegou na fila Arrive com Tamanho: 13
+[ETE 2108.0ms]  Processo 8 migrou para fila Ready
+[ETE 2119.0ms] Processo 32 encerrado
+[ETE 2134.0ms] Restam 11 Slices para encerrar o processo 54
+[ETE 2144.0ms] Processo 69 chegou na fila Arrive com Tamanho: 9
+[ETE 2155.0ms] Restam 23 Slices para encerrar o processo 8
+[ETE 2166.0ms] Processo 71 chegou na fila Arrive com Tamanho: 11
+[ETE 2176.0ms] Processo 54 solicitou IO - Valor de Prioridade: 1
+[ETE 2187.0ms] Restam 9 Slices para encerrar o processo 54
+[ETE 2197.0ms] Restam 21 Slices para encerrar o processo 8
+[ETE 2211.0ms] Processo 54 solicitou IO - Valor de Prioridade: 1

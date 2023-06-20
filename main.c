@@ -7,38 +7,44 @@
 #include "untils.h"
 clock_t begin;
 
+static int ml;
+
 Process* io(Lista* l, Fila* io){
-    if(l->p == NULL) trace_print(0, 0, 0);
-    if(io->ini == NULL && io->fim == NULL) {
+    if (l->p == NULL)
+        trace_print(0, 0, 0);
+    if (io->ini == NULL && io->fim == NULL) {
         io_to_device(l, io);
-    } 
-    if(rand()%100>75) {
+    }
+    if (rand() % 100 > 75) {
         io->ini->in_io = true;
-    } 
+    }
     return io->ini;
 }
 
 Process* cpu(Process* p, int time_slice, Lista* l, Fila* io_device){
-    if(p->tam < time_slice) {
+    if (p->tam < time_slice) {
         usleep(p->tam);
         p->tam = 0;
         return p;
-    } else usleep(time_slice);
-    if(p->IO == 1)  {
-        if(rand()%100 > 75) {
+    } else {
+        usleep(time_slice);
+    }
+    if (p->IO == 1) {
+        if (rand() % 100 > 75) {
             trace_print(8, p->id, p->pr);
-            insere_crescente(l, p); 
-            if(rand()%100 > 75) {
+            l = insere_crescente(l, p);
+            if (rand() % 100 > 75) {
                 io(l, io_device);
                 return p; // retorna sem decrementar a time slice
-            };
-            p->tam = p->tam - time_slice; 
+            }
+            p->tam = p->tam - time_slice;
             return p;
         }
     }
     p->tam = p->tam - time_slice;
     return p;
 }
+
 
 void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo, Lista* l){
     Fila* io_queue = fila_cria();
@@ -85,18 +91,26 @@ void queue_init(Fila* r, Fila* a, int time_slice, int tempo_maximo){
 }
 
 int main(int argc, char* argv[]) {
+    //Colocar um print p mostrar contador zerado
+    printf("[ETE %.1fms] Filas Criadas, exibindo estado atual:\n", (double)(clock()));
     if (argc != 2) {
         printf("Uso: ./filename <NUM_MAX_DE_PROCESSOS\n");
         return 1;
     }
+
+    ml = 10;
+
     Fila* arrive_queue = fila_cria();
     Fila* ready_queue = fila_cria();
     Lista* io_queue = lst_cria();
-    int tempo_maximo = 100; 
+
+    int tempo_maximo = 10000; 
     int time_slice = 2;
+
     trace_print(1, 0, 0);
     queue_init(ready_queue, arrive_queue, time_slice, tempo_maximo);
     trace_print(2,0,0);
     processa_ready(ready_queue, arrive_queue, time_slice, tempo_maximo, io_queue);
+
     return 0;
 }

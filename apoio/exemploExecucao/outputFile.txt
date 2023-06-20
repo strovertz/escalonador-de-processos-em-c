@@ -1,0 +1,329 @@
+::::::::::::::New Simulation::::::::::::::
+***Date: 2023-05-31 09:40:08 ***
+***ST: 1000, ML: 25, RR: 3 ***
+
+[49] #4
+  Turnaround: 45
+  Espera: 41
+
+[80] #22
+  Turnaround: 55
+  Espera: 54
+
+[84] #24
+  Turnaround: 53
+  Espera: 52
+
+[102] #8
+  Turnaround: 94
+  Espera: 69
+
+[110] #3
+  Turnaround: 107
+  Espera: 96
+
+[120] #16
+  Turnaround: 103
+  Espera: 91
+
+[127] #20
+  Turnaround: 105
+  Espera: 101
+
+[143] #10
+  Turnaround: 133
+  Espera: 125
+
+[156] #2
+  Turnaround: 154
+  Espera: 132
+
+[185] #6
+  Turnaround: 179
+  Espera: 160
+
+[193] #11
+  Turnaround: 182
+  Espera: 173
+
+[196] #1
+  Turnaround: 195
+  Espera: 159
+
+[198] #12
+  Turnaround: 185
+  Espera: 175
+
+[225] #17
+  Turnaround: 206
+  Espera: 167
+
+[229] #19
+  Turnaround: 208
+  Espera: 197
+
+[239] #27
+  Turnaround: 158
+  Espera: 186
+
+[250] #37
+  Turnaround: 53
+  Espera: 194
+
+[266] #5
+  Turnaround: 261
+  Espera: 243
+
+[272] #18
+  Turnaround: 252
+  Espera: 238
+
+[329] #14
+  Turnaround: 314
+  Espera: 298
+
+[343] #32
+  Turnaround: 215
+  Espera: 285
+
+[362] #25
+  Turnaround: 328
+  Espera: 311
+
+[369] #9
+  Turnaround: 360
+  Espera: 332
+
+[372] #34
+  Turnaround: 215
+  Espera: 281
+
+[380] #13
+  Turnaround: 366
+  Espera: 347
+
+[386] #43
+  Turnaround: 119
+  Espera: 269
+
+[409] #28
+  Turnaround: 324
+  Espera: 353
+
+[427] #31
+  Turnaround: 306
+  Espera: 359
+
+[442] #29
+  Turnaround: 339
+  Espera: 383
+
+[445] #21
+  Turnaround: 421
+  Espera: 387
+
+[450] #26
+  Turnaround: 400
+  Espera: 394
+
+[519] #45
+  Turnaround: 189
+  Espera: 383
+
+[527] #44
+  Turnaround: 254
+  Espera: 386
+
+[532] #35
+  Turnaround: 346
+  Espera: 463
+
+[549] #38
+  Turnaround: 350
+  Espera: 474
+
+[571] #33
+  Turnaround: 427
+  Espera: 503
+
+[580] #40
+  Turnaround: 350
+  Espera: 481
+
+[591] #54
+  Turnaround: 148
+  Espera: 327
+
+[592] #36
+  Turnaround: 398
+  Espera: 520
+
+[602] #49
+  Turnaround: 229
+  Espera: 397
+
+[608] #41
+  Turnaround: 368
+  Espera: 500
+
+[613] #56
+  Turnaround: 162
+  Espera: 338
+
+[652] #39
+  Turnaround: 426
+  Espera: 552
+
+[658] #46
+  Turnaround: 314
+  Espera: 473
+
+[674] #59
+  Turnaround: 141
+  Espera: 310
+
+[675] #57
+  Turnaround: 155
+  Espera: 395
+
+[677] #62
+  Turnaround: 96
+  Espera: 299
+
+[680] #48
+  Turnaround: 310
+  Espera: 472
+
+[687] #23
+  Turnaround: 659
+  Espera: 578
+
+[695] #47
+  Turnaround: 332
+  Espera: 518
+
+[716] #51
+  Turnaround: 329
+  Espera: 498
+
+[735] #30
+  Turnaround: 624
+  Espera: 608
+
+[740] #64
+  Turnaround: 147
+  Espera: 345
+
+[745] #75
+  Turnaround: 49
+  Espera: 162
+
+[749] #7
+  Turnaround: 742
+  Espera: 647
+
+[756] #53
+  Turnaround: 328
+  Espera: 505
+
+[759] #61
+  Turnaround: 187
+  Espera: 377
+
+[777] #52
+  Turnaround: 367
+  Espera: 532
+
+[781] #42
+  Turnaround: 530
+  Espera: 587
+
+[782] #74
+  Turnaround: 94
+  Espera: 206
+
+[802] #63
+  Turnaround: 210
+  Espera: 401
+
+[805] #55
+  Turnaround: 359
+  Espera: 533
+
+[839] #65
+  Turnaround: 236
+  Espera: 416
+
+[844] #66
+  Turnaround: 235
+  Espera: 402
+
+[867] #78
+  Turnaround: 126
+  Espera: 237
+
+[869] #72
+  Turnaround: 191
+  Espera: 325
+
+[876] #58
+  Turnaround: 348
+  Espera: 526
+
+[877] #67
+  Turnaround: 263
+  Espera: 395
+
+[904] #86
+  Turnaround: 101
+  Espera: 219
+
+[931] #85
+  Turnaround: 148
+  Espera: 245
+
+[936] #79
+  Turnaround: 190
+  Espera: 316
+
+[940] #76
+  Turnaround: 223
+  Espera: 305
+
+[946] #89
+  Turnaround: 101
+  Espera: 221
+
+[953] #73
+  Turnaround: 272
+  Espera: 385
+
+[958] #77
+  Turnaround: 222
+  Espera: 350
+
+[984] #69
+  Turnaround: 325
+  Espera: 513
+
+
+	------Resultados------
+1- Nº de processos completados: 76
+2- Nº de I/O completados: 70
+3- Tempo médio de turnaround: 250.4737
+4- Tempo médio de espera: 332.5921
+5- A CPU rodou por 998, 99.7003% do tempo total.
+6- A CPU ficou em IDLE por 2, 0.2997% do tempo total.
+7- O I/O rodou por 955, 95.4046% do tempo total.
+8- Dados das Filas:
+   --ARRIVE:
+	Tempo médio de espera: 111.9802
+	Tamanho médio: 12.2018
+   --READY:
+	Tempo médio de espera: 47.7775
+	Tamanho médio: 18.8851
+   --IoQ:
+	Tempo médio de espera: 26.1408
+	Tamanho médio: 3.6194
+
+

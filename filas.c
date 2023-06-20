@@ -15,7 +15,7 @@ Fila* fila_cria(void){
 }
 
 int fila_tam(Fila* f){
-	int tam;
+	int tam = 0; 
 	Process *p = f->ini;
 	if (p->prox == NULL)
 	{
@@ -48,12 +48,13 @@ void fila_insere_processo(Fila* r, Process* n){
 void fila_insere_arrive(Fila* f){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = clock();
-    l->id = rand()%9000;
+    l->id = rand()%90;
     l->IO = rand()%2;
-	while (l->tam<=0) l->tam = rand()%10;
+	l->tam = (rand()%30)+1;
 	l->in_io = false;
-	while (l->pr<=0) l->pr = rand()%10;;
-	printf("[ETE %.1fms] Processo %d chegou na fila Arrive com Tamanho: %d e Priodidade: %d\n", (double)(clock()), l->id, l->tam, l->pr);
+	l->pr = (rand()%5)+1;
+	trace_print(10,l->id,l->tam);
+	//printf("[ETE %.1fms] Processo %d chegou na fila Arrive com Tamanho: %d e Priodidade: %d\n", (double)(clock()), l->id, l->tam, l->pr);
 	l->prox = NULL;
 	
 	if(f->fim != NULL)
@@ -248,7 +249,6 @@ Lista* insere_crescente(Lista* l, Process* proc) {
     novo->ant = NULL; // Initialize ant pointer to NULL
     novo->prox = NULL; // Initialize prox pointer to NULL
 
-    printf("[ETE %.1fms] Processo %d inserido com sucesso na fila dupla encadeada com prioridade %d\n", (double)(clock()), novo->p->id, novo->pr);
 	
     if (ant == NULL) { // insere no início
         novo->prox = l;
@@ -260,6 +260,7 @@ Lista* insere_crescente(Lista* l, Process* proc) {
         novo->prox = ant->prox;
         if (novo->prox != NULL) {
             novo->prox->ant = novo;
+			
         }
         ant->prox = novo;
         novo->ant = ant;
