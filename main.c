@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include "filas.h"
 #include "untils.h"
+
 clock_t begin;
 
 static int ml;
@@ -14,6 +15,7 @@ Process* io(Lista* l, Fila* io){
         trace_print(0, 0, 0);
     if (io->ini == NULL && io->fim == NULL) {
         io_to_device(l, io);
+        lst_imprime(l);
     }
     if (rand() % 100 > 75) {
         io->ini->in_io = true;
@@ -33,6 +35,7 @@ Process* cpu(Process* p, int time_slice, Lista* l, Fila* io_device){
         if (rand() % 100 > 75) {
             trace_print(8, p->id, p->pr);
             l = insere_crescente(l, p);
+            lst_imprime(l);
             if (rand() % 100 > 75) {
                 io(l, io_device);
                 return p; // retorna sem decrementar a time slice
@@ -45,58 +48,64 @@ Process* cpu(Process* p, int time_slice, Lista* l, Fila* io_device){
     return p;
 }
 
-
-void processa_ready(Fila* r, Fila * a,  int time_slice, int tempo_maximo, Lista* l){
+void processa_ready(Fila* r, Fila* a, int time_slice, int tempo_maximo, Lista* l){
     Fila* io_queue = fila_cria();
     Process* p = fila_retira(r);
     fila_imprime(r);
-    trace_print(3,p->id, p->tam);
-    if(p == NULL) {
-        fila_insere_arrive(a); 
-        trace_print(4,0,0);
+    trace_print(3, p->id, p->tam);
+    if (p == NULL) {
+        fila_insere_arrive(a);
+        trace_print(4, 0, 0);
         arrive_to_ready(r, a);
     }
-    while (tempo_maximo != 0){      
+    int tempo_atual = 0;
+    while (tempo_maximo != 0) {
         p = cpu(p, time_slice, l, io_queue);
-        if(p->tam > 0 && !p->in_io) {
-            fila_insere_processo(r, p); 
-            trace_print(5,p->id,p->tam);
-        } else if (!p->in_io) { 
-            trace_print(6,p->id,0);
-        } else trace_print(7,p->id,0);
-        if(rand()%300>256) fila_insere_arrive(a);
-        if(p->prox == NULL){
-            for(int i = 0; i < rand()%10; i++) {
-                fila_insere_arrive(a); 
+        if (p->tam > 0 && !p->in_io) {
+            fila_insere_processo(r, p);
+            trace_print(5, p->id, p->tam);
+        } else if (!p->in_io) {
+            trace_print(6, p->id, 0);
+        } else {
+            trace_print(7, p->id, 0);
+        }
+        if (rand() % 300 > 256) {
+            fila_insere_arrive(a);
+        }
+        if (p->prox == NULL) {
+            for (int i = 0; i < rand() % 10; i++) {
+                fila_insere_arrive(a);
                 arrive_to_ready(r, a);
             }
         }
         p = fila_retira(r);
         tempo_maximo--;
+        tempo_atual++;
+
+        if (tempo_atual % ml == 0 && p != NULL) {
+            fila_insere_processo(r, p);
+            p = fila_retira(r);
+            trace_print(9, p->id, 0);
+        }
     }
-    if (tempo_maximo == 0)
-    {
-        printf("\n Tempo Max de Execucao Alcancado \n");
+    if (tempo_maximo == 0) {
+        printf("\n Tempo Máximo de Execução Alcançado \n");
     }
 }
 
-void queue_init(Fila* r, Fila* a, int time_slice, int tempo_maximo){
-    for (int i = 0; i < rand() %10; i++) {
+void queue_init(Fila* r, Fila* a, int time_slice, int tempo_maximo) {
+    for (int i = 0; i < rand() % 10; i++) {
         fila_insere_arrive(a);
-        }
+    }
     fila_imprime(a);
     arrive_to_ready(r, a);
     fila_imprime(r);
-    printf("\n");    
+    printf("\n");
 }
 
 int main(int argc, char* argv[]) {
-    //Colocar um print p mostrar contador zerado
+    // Colocar um print para mostrar contador zerado
     printf("[ETE %.1fms] Filas Criadas, exibindo estado atual:\n", (double)(clock()));
-    if (argc != 2) {
-        printf("Uso: ./filename <NUM_MAX_DE_PROCESSOS\n");
-        return 1;
-    }
 
     ml = 10;
 
@@ -104,12 +113,29 @@ int main(int argc, char* argv[]) {
     Fila* ready_queue = fila_cria();
     Lista* io_queue = lst_cria();
 
-    int tempo_maximo = 10000; 
+    int tempo_maximo = 10000;
     int time_slice = 2;
 
     trace_print(1, 0, 0);
+
+    if (argc < 2) {
+        printf("Erro: Arquivo de entrada não fornecido.\n");
+        return 1;
+    }
+
+    FILE* arquivo_entrada = fopen(argv[1], "r");
+    if (arquivo_entrada == NULL) {
+        printf("Erro ao abrir o arquivo de entrada.\n");
+        return 1;
+    }
+
+    fscanf(arquivo_entrada, "%d", &tempo_maximo);
+    fscanf(arquivo_entrada, "%d", &ml);
+
+    fclose(arquivo_entrada);
+
     queue_init(ready_queue, arrive_queue, time_slice, tempo_maximo);
-    trace_print(2,0,0);
+    trace_print(2, 0, 0);
     processa_ready(ready_queue, arrive_queue, time_slice, tempo_maximo, io_queue);
 
     return 0;
