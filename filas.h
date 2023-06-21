@@ -41,7 +41,7 @@ void lst_desaloca(Lista* l);
 Fila* fila_cria(void);
 int fila_tam(Fila* f);
 void fila_insere_processo(Fila* f, Process* n);
-void fila_insere_arrive(Fila* f);
+void fila_insere_arrive(Fila* f,  int  tempo_maximo);
 Process* fila_retira(Fila* f);
 void fila_imprime(Fila* f);
 int fila_vazia(Fila* f);

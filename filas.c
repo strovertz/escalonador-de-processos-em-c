@@ -45,7 +45,7 @@ void fila_insere_processo(Fila* r, Process* n){
 	r->fim = l;
 }
 
-void fila_insere_arrive(Fila* f){
+void fila_insere_arrive(Fila* f,  int  tempo_maximo){
 	Process* l = (Process*) malloc(sizeof(Process));
 	l->queuetime = clock();
     l->id = rand()%90;
@@ -53,8 +53,7 @@ void fila_insere_arrive(Fila* f){
 	l->tam = (rand()%30)+1;
 	l->in_io = false;
 	l->pr = (rand()%5)+1;
-	trace_print(10,l->id,l->tam);
-	//printf("[ETE %.1fms] Processo %d chegou na fila Arrive com Tamanho: %d e Priodidade: %d\n", (double)(clock()), l->id, l->tam, l->pr);
+	trace_print(tempo_maximo,10,l->id,l->tam);
 	l->prox = NULL;
 	
 	if(f->fim != NULL)
@@ -67,7 +66,6 @@ void fila_insere_arrive(Fila* f){
 
 Process* fila_retira(Fila* f){
     if (f->ini == NULL) {
-        // A fila está vazia, não há elementos para remover
         return NULL;
     }
     Process* l = f->ini;

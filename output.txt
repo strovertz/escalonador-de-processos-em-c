@@ -1,0 +1,1 @@
+[ETE 1499.0ms] Filas Criadas, exibindo estado atual:
