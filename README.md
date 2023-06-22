@@ -4,7 +4,7 @@
 
 Considere um sistema com uma CPU e um dispositivo de I/O. O sistema possui o parâmetro Grau de Multiprogramação (ML), o qual determina o nº máximo de processos existentes. A CPU possui uma fila de prontos (ready queue) e o dispositivo de I/O possui uma fila de dispositivos (I/O queue). A carga inicial do sistema e, consequentemente, a manutenção do grau de multiprogramação é dada por uma fila denominada fila de chegada (arrive queue). De tempos em tempos, o programa gera processos que irão executar no sistema (simulando o escalonador de longo prazo) e os coloca na fila de chegada (ordem FIFO). Se o sistema estiver com a carga completa (nº de processos no sistema = ML), o processo ficará esperando, caso contrário, entrará no sistema.
 
-![Screenshot_20230608_112811](https://github.com/strovertz/simescalonamento/assets/74078237/df574217-ef29-475e-ad05-9efc174ce8e0)
+![Screenshot_20230608_112811](https://github.com/strovertz/jumpmasterblaster/assets/74078237/df574217-ef29-475e-ad05-9efc174ce8e0)
 
 
 Uma vez no sistema, o processo irá tentar obter a CPU. Se a CPU estiver ocupada por outro processo, o processo solicitante é colocado na fila de prontos (ordem FIFO). Caso contrário, o processo obtém a CPU e executa até que uma das 3 situações ocorra:

@@ -5,22 +5,21 @@
 #include "filas.h"
 #include "untils.h"
 // função que tira da fila Arrive q joga pra fila Ready
-int arrive_to_ready(Fila* r, Fila* a, int  tempo_maximo){
+int arrive_to_ready(Fila* r, Fila* a, int  tempo_atual){
     Process* n = fila_retira(a);
     fila_insere_processo(r, n);
-    trace_print(tempo_maximo,9, n->id, 0);
-    tempo_maximo++;
-    return tempo_maximo;
+    trace_print(tempo_atual,9, n->id, 0);
+    tempo_atual++;
+    return tempo_atual;
 }
 
-int io_to_device(Lista* l, Fila* io, int  tempo_maximo){
-    // fprintf("dando bo aq1\n\n");
+Fila* io_to_device(Lista* l, Fila* io, int  tempo_atual){
     Process* p = ultimo(l);
     if(p != NULL){
-        fila_insere_processo(io, p);
-        tempo_maximo++;
-        return tempo_maximo;
-    } else trace_print(tempo_maximo,0,0,0);
+        io = fila_insere_processo(io, p);
+        tempo_atual++;
+        return io;
+    } else trace_print(tempo_atual,0,0,0);
 }
 
 void trace_print(int time, int selector, int process_id, int utils){

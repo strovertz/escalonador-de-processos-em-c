@@ -24,7 +24,7 @@ void filaLista_insere(Fila_lista* f, int valor){
 	f->fim = l;
 }
 
-int filaLista_retira(Fila_lista* f){
+bool  filaLista_retira(Fila_lista* f){
 	Lista* l = f->ini;
 	int valor = l->info;
 
@@ -36,7 +36,7 @@ int filaLista_retira(Fila_lista* f){
 
 	free(l);
 
-	return valor;
+	return true;
 }
 
 void filaLista_imprime(Fila_lista* f){

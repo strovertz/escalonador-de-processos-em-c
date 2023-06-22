@@ -9,19 +9,23 @@
 
 clock_t begin;
 
+static int ml_cnt;
 static int ml;
 static int tempo_atual;
 static int max_time;
 
 Process* io(Lista* l, Fila* io, int tempo_maximo) {
-    if (l->p == NULL)
-        trace_print(tempo_atual,0, 0, 0);
+    // if (l->p == NULL) {
+    //     trace_print(tempo_atual,0, 0, 0);
+    //     return NULL;
+    //     }
     if (io->ini == NULL && io->fim == NULL) {
-        io_to_device(l, io, tempo_atual);
+        io = io_to_device(l, io, tempo_atual);
         lst_imprime(l);
     }
     if (rand() % 100 > 75) {
         io->ini->in_io = true;
+
     }
     return io->ini;
 }
@@ -59,10 +63,11 @@ void processa_ready(Fila* r, Fila* a, int time_slice, int tempo_maximo, Lista* l
     Process* p = fila_retira(r);
     fila_imprime(r);
     trace_print(tempo_atual,3, p->id, p->tam);
-    if (p == NULL) {
+    if (p == NULL && ml_cnt < ml) {
         fila_insere_arrive(a, tempo_atual);
         trace_print(tempo_atual,4, 0, 0);
         arrive_to_ready(r, a, tempo_atual);
+        tempo_atual++;
     }
         while (tempo_atual != tempo_maximo) {
         p = cpu(p, time_slice, l, io_queue);
@@ -71,27 +76,28 @@ void processa_ready(Fila* r, Fila* a, int time_slice, int tempo_maximo, Lista* l
             trace_print(tempo_atual,5, p->id, p->tam);
         } else if (!p->in_io) {
             trace_print(tempo_atual,6, p->id, 0);
+            ml_cnt--;
         } else {
             trace_print(tempo_atual,7, p->id, 0);
         }
-        if (rand() % 300 > 256) {
+        if (rand() % 300 > 256 &&  ml_cnt < ml) {
             fila_insere_arrive(a, tempo_atual);
         }
         if (p->prox == NULL) {
             for (int i = 0; i < rand() % 10; i++) {
-                fila_insere_arrive(a, tempo_atual);
-                arrive_to_ready(r, a, tempo_atual);
+                if(ml_cnt < ml){
+                    fila_insere_arrive(a, tempo_atual);
+                    arrive_to_ready(r, a, tempo_atual);
+                } else printf("Processador esgotado, aguarde antes de inserir novos processos");
             }
         }
         p = fila_retira(r);
         tempo_atual++;
-        if (tempo_atual % ml == 0 && p != NULL) {
-            fila_insere_processo(r, p);
-            p = fila_retira(r);
-            trace_print(tempo_atual,9, p->id, 0);
-        }
+         if (tempo_atual == tempo_maximo) {
+            printf("\nTempo Máximo de Execução Alcançado\n");
+       }
     }
-    if (tempo_atual == 0) {
+    if (tempo_atual == tempo_maximo) {
         printf("\nTempo Máximo de Execução Alcançado\n");
     }
 }
@@ -99,6 +105,7 @@ void processa_ready(Fila* r, Fila* a, int time_slice, int tempo_maximo, Lista* l
 void queue_init(Fila* r, Fila* a, int time_slice, int tempo_maximo) {
     for (int i = 0; i < rand() % 10; i++) {
         fila_insere_arrive(a, tempo_maximo);
+        ml_cnt++;
     }
     fila_imprime(a);
     arrive_to_ready(r, a, tempo_maximo);
@@ -110,7 +117,6 @@ void queue_init(Fila* r, Fila* a, int time_slice, int tempo_maximo) {
 int main(int argc, char* argv[]) {
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-
     FILE *text;
     text = fopen("traceFile.txt", "a"); // Abre o arquivo em modo de apêndice (append)
 
@@ -132,7 +138,7 @@ int main(int argc, char* argv[]) {
     fscanf(arquivo_entrada, "%d", &tempo_maximo);
     fscanf(arquivo_entrada, "%d", &ml);
     fscanf(arquivo_entrada, "%d", &rr);
-    fprintf(text, "::::::::::::::New Simulation::::::::::::::\n    ***Date: %d-%02d-%02d %02d:%02d:%02d***\n     ***ST: %d, ML: %d, RR: %d ***\n\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec,tempo_maximo,ml,rr);
+    fprintf(text, "::::::::::::::New Simulation::::::::::::::\n    ***Date: %d-%02d-%02d %02d:%02d:%02d***\n     ***ST: %d, ML: %d, RR: %d ***\n\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec,tempo_atual,ml_cnt,rr);
    
     tempo_maximo = tempo_maximo*(-1);
 
