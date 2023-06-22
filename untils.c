@@ -13,14 +13,17 @@ int arrive_to_ready(Fila* r, Fila* a, int  tempo_atual){
     return tempo_atual;
 }
 
-Fila* io_to_device(Lista* l, Fila* io, int  tempo_atual){
-    Process* p = ultimo(l);
-    if(p != NULL){
-        io = fila_insere_processo(io, p);
+Fila* io_to_device(Process* p, Fila* io, int tempo_atual) {
+    if (p != NULL) {
+        fila_insere_processo(io, p);
         tempo_atual++;
-        return io;
-    } else trace_print(tempo_atual,0,0,0);
+    } else {
+        trace_print(tempo_atual, 0, 0, 0);
+    }
+
+    return io;  // Retorna a fila de IO atualizada
 }
+
 
 void trace_print(int time, int selector, int process_id, int utils){
     FILE *text;
@@ -54,7 +57,7 @@ void trace_print(int time, int selector, int process_id, int utils){
             fprintf(text, "[ETE %dms] Processo %d encerrado\n", time, process_id);
             break;
         case 7:
-            fprintf(text, "[ETE %dms] Processo %d em I/O\n", time, process_id); 
+            fprintf(text, "[ETE %dms] Processo %d para fila de I/O\n", time, process_id); 
             break;
         case 8:
             fprintf(text, "[ETE %dms] Processo %d solicitou IO - Valor de Prioridade: %d\n", time, process_id, utils); 
