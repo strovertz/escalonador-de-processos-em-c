@@ -10,7 +10,6 @@
 Fila* fila_cria(void){
 	Fila* f = (Fila*) malloc(sizeof(Fila));
 	f->ini = f->fim = NULL;
-
 	return f;
 }
 
@@ -100,8 +99,12 @@ void fila_libera(Fila* f){
 }	
 
 Lista* lst_cria(void){
-
-	return NULL;
+	Lista* l = (Lista*)malloc(sizeof(Lista));
+	l->ant = l->ini = l->prox = NULL;
+	l->p = NULL;
+	l->pr = 0;
+	if(l == NULL) printf("Erro na alocacao da Lista");
+	return l;
 }
 
 // // inserção no início: retorna a lista atualizada 

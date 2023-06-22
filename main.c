@@ -15,9 +15,9 @@ static int max_time;
 
 Process* io(Lista* l, Fila* io, int tempo_maximo) {
     if (l->p == NULL)
-        trace_print(tempo_maximo,0, 0, 0);
+        trace_print(tempo_atual,0, 0, 0);
     if (io->ini == NULL && io->fim == NULL) {
-        io_to_device(l, io, tempo_maximo);
+        io_to_device(l, io, tempo_atual);
         lst_imprime(l);
     }
     if (rand() % 100 > 75) {
@@ -26,23 +26,24 @@ Process* io(Lista* l, Fila* io, int tempo_maximo) {
     return io->ini;
 }
 
-Process* cpu(Process* p, int time_slice, Lista* l, Fila* io_device, int tempo_maximo) {
+Process* cpu(Process* p, int time_slice, Lista* l, Fila* io_device) {
+    printf("%d\n", tempo_atual);
     if (p->tam < time_slice) {
-        usleep(p->tam);
-        tempo_atual = tempo_atual+p->tam;
+        usleep(p->tam); 
         p->tam = 0;
-        return p;
-    } else {
+        tempo_atual = tempo_atual+p->tam;
+        return p; 
+    } else {  
         usleep(time_slice);
         tempo_atual = tempo_atual+time_slice;
     }
     if (p->IO == 1) {
         if (rand() % 100 > 75) {
-            trace_print(tempo_maximo,8, p->id, p->pr);
+            trace_print(tempo_atual,8, p->id, p->pr);
             l = insere_crescente(l, p);
             lst_imprime(l);
             if (rand() % 100 > 75) {
-                io(l, io_device, tempo_maximo);
+                io(l, io_device, tempo_atual);
                 return p; // retorna sem decrementar a time slice
             }
             p->tam = p->tam - time_slice;
@@ -57,41 +58,40 @@ void processa_ready(Fila* r, Fila* a, int time_slice, int tempo_maximo, Lista* l
     Fila* io_queue = fila_cria();
     Process* p = fila_retira(r);
     fila_imprime(r);
-    trace_print(tempo_maximo,3, p->id, p->tam);
+    trace_print(tempo_atual,3, p->id, p->tam);
     if (p == NULL) {
-        fila_insere_arrive(a, tempo_maximo);
-        trace_print(tempo_maximo,4, 0, 0);
-        arrive_to_ready(r, a, tempo_maximo);
+        fila_insere_arrive(a, tempo_atual);
+        trace_print(tempo_atual,4, 0, 0);
+        arrive_to_ready(r, a, tempo_atual);
     }
-        while (tempo_maximo != 0) {
-        p = cpu(p, time_slice, l, io_queue, tempo_maximo);
+        while (tempo_atual != tempo_maximo) {
+        p = cpu(p, time_slice, l, io_queue);
         if (p->tam > 0 && !p->in_io) {
             fila_insere_processo(r, p);
-            trace_print(tempo_maximo,5, p->id, p->tam);
+            trace_print(tempo_atual,5, p->id, p->tam);
         } else if (!p->in_io) {
-            trace_print(tempo_maximo,6, p->id, 0);
+            trace_print(tempo_atual,6, p->id, 0);
         } else {
-            trace_print(tempo_maximo,7, p->id, 0);
+            trace_print(tempo_atual,7, p->id, 0);
         }
         if (rand() % 300 > 256) {
-            fila_insere_arrive(a, tempo_maximo);
+            fila_insere_arrive(a, tempo_atual);
         }
         if (p->prox == NULL) {
             for (int i = 0; i < rand() % 10; i++) {
-                fila_insere_arrive(a, tempo_maximo);
-                arrive_to_ready(r, a, tempo_maximo);
+                fila_insere_arrive(a, tempo_atual);
+                arrive_to_ready(r, a, tempo_atual);
             }
         }
         p = fila_retira(r);
-        tempo_maximo--;
         tempo_atual++;
         if (tempo_atual % ml == 0 && p != NULL) {
             fila_insere_processo(r, p);
             p = fila_retira(r);
-            trace_print(tempo_maximo,9, p->id, 0);
+            trace_print(tempo_atual,9, p->id, 0);
         }
     }
-    if (tempo_maximo == 0) {
+    if (tempo_atual == 0) {
         printf("\nTempo Máximo de Execução Alcançado\n");
     }
 }
@@ -111,7 +111,8 @@ int main(int argc, char* argv[]) {
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
 
-    ml = 10;
+    FILE *text;
+    text = fopen("traceFile.txt", "a"); // Abre o arquivo em modo de apêndice (append)
 
     Fila* arrive_queue = fila_cria();
     Fila* ready_queue = fila_cria();
@@ -131,9 +132,11 @@ int main(int argc, char* argv[]) {
     fscanf(arquivo_entrada, "%d", &tempo_maximo);
     fscanf(arquivo_entrada, "%d", &ml);
     fscanf(arquivo_entrada, "%d", &rr);
-    printf("::::::::::::::New Simulation::::::::::::::\n    ***Date: %d-%02d-%02d %02d:%02d:%02d***\n     ***ST: %d, ML: %d, RR: %d ***\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec,tempo_maximo,ml,rr);
+    fprintf(text, "::::::::::::::New Simulation::::::::::::::\n    ***Date: %d-%02d-%02d %02d:%02d:%02d***\n     ***ST: %d, ML: %d, RR: %d ***\n\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec,tempo_maximo,ml,rr);
+   
     tempo_maximo = tempo_maximo*(-1);
 
+    fclose(text);
     fclose(arquivo_entrada);
     tempo_atual++;
     queue_init(ready_queue, arrive_queue, rr, tempo_maximo);
