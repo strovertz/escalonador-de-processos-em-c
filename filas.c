@@ -83,6 +83,16 @@ void fila_imprime(Fila* f){
 		printf("Process ID: %d;\n	Time Stamp: %d\n	CPU times Needed: %d\n", l->id, l->queuetime, l->tam);
 }
 
+// void fila_imprime_conta(Fila* f){
+// 	Process* l;
+// 	int cont =0;
+// 	for(l = f->ini; l != NULL; l = l->prox){
+// 		printf("Process ID: %d", l->id);
+		
+// 	}
+// 	printf("[Size: %d]", cont);
+// }
+
 int fila_vazia(Fila* f){
 	return(f->ini == NULL);
 }	

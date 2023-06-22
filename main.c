@@ -91,6 +91,7 @@ void processa_ready(Fila* r, Fila* a, int time_slice, int tempo_maximo, Lista* l
                 } else printf("Processador esgotado, aguarde antes de inserir novos processos");
             }
         }
+        
         p = fila_retira(r);
         tempo_atual++;
          if (tempo_atual == tempo_maximo) {

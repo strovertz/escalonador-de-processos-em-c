@@ -12,6 +12,7 @@ typedef struct lista{
     bool in_io;
     int pr;
 	struct lista* prox;
+    int trn;
 }Process;
 
 typedef struct Fila{
